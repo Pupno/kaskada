@@ -2,10 +2,10 @@
 (function () {
   var $ = function (id) { return document.getElementById(id); };
   var f = window.fmt;
-  var IDS = ['mw', 'capex', 'grant', 'debt', 'rate', 'tenor', 'grace', 'occ1', 'occ2', 'occmax', 'util', 'colo', 'heatp', 'heatgwh', 'elp', 'cop', 'fix', 'escrev', 'escop', 'tax', 'disc'];
+  var IDS = ['mw', 'capex', 'grant', 'debt', 'rate', 'tenor', 'grace', 'occ1', 'occ2', 'occmax', 'util', 'colo', 'heatp', 'heatgwh', 'elp', 'cop', 'fix', 'escrev', 'escop', 'tax', 'disc', 'orig', 'roy', 'carry', 'sites'];
   var inputs = {}; IDS.forEach(function (k) { inputs[k] = $('i-' + k); });
-  var UNITS = { mw: ' MW', capex: ' mil. €/MW', grant: ' %', debt: ' %', rate: ' %', tenor: ' r.', grace: ' r.', occ1: ' %', occ2: ' %', occmax: ' %', util: ' %', colo: ' €/kW/m', heatp: ' €/MWh', heatgwh: ' GWh', elp: ' €/MWh', cop: '', fix: ' mil. €/MW', escrev: ' %', escop: ' %', tax: ' %', disc: ' %' };
-  var DEC = { capex: 1, cop: 1, fix: 2, escrev: 1, escop: 1, rate: 1, disc: 1 };
+  var UNITS = { mw: ' MW', capex: ' mil. €/MW', grant: ' %', debt: ' %', rate: ' %', tenor: ' r.', grace: ' r.', occ1: ' %', occ2: ' %', occmax: ' %', util: ' %', colo: ' €/kW/m', heatp: ' €/MWh', heatgwh: ' GWh', elp: ' €/MWh', cop: '', fix: ' mil. €/MW', escrev: ' %', escop: ' %', tax: ' %', disc: ' %', orig: ' % investície', roy: ' €/MWh', carry: ' %', sites: ' lokalít' };
+  var DEC = { capex: 1, cop: 1, fix: 2, escrev: 1, escop: 1, rate: 1, disc: 1, orig: 1, roy: 2 };
   var YEAR0 = 2028, CONSTR = 2, OPS = 25, DEP_YEARS = 20;
 
   function p() { var o = {}; IDS.forEach(function (k) { o[k] = parseFloat(inputs[k].value); }); return o; }
@@ -21,10 +21,13 @@
         y.capex = -capex * split[i]; y.grant = grant * split[i]; y.draw = debt * split[i];
         y.interest = -bal * r; bal += y.draw;
         y.revColo = y.revHeat = y.revOther = y.rev = y.costEl = y.costFix = y.ebitda = y.dep = y.taxU = y.taxL = y.principal = 0;
-        y.heatGwh = 0; y.elGwh = 0;
-        y.cfProj = y.capex + y.grant;
-        y.cfEq = y.capex + y.grant + y.draw + y.interest;
+        y.heatGwh = 0; y.elGwh = 0; y.royalty = 0;
+        // odmena za prípravu projektu sa vypláca holdingu pôvodcu pri uzavretí financovania (prvý rok výstavby)
+        y.orig = i === 0 ? -capex * q.orig / 100 : 0;
+        y.cfProj = y.capex + y.grant + y.orig;
+        y.cfEq = y.capex + y.grant + y.draw + y.interest + y.orig;
         y.cfads = 0; y.ds = 0; y.dscr = null;
+        y.founder = -y.orig;
       } else {
         var t = i - CONSTR;
         var occ = (t === 0 ? q.occ1 : t === 1 ? q.occ2 : q.occmax) / 100;
@@ -39,7 +42,9 @@
         y.elGwh = elDc + elHp;
         y.costEl = -y.elGwh * 1000 * q.elp / 1e6 * esc;
         y.costFix = -q.fix * q.mw * escc;
-        y.ebitda = y.rev + y.costEl + y.costFix;
+        y.royalty = -y.heatGwh * 1000 * q.roy / 1e6 * esc;
+        y.orig = 0;
+        y.ebitda = y.rev + y.costEl + y.costFix + y.royalty;
         y.dep = t < DEP_YEARS ? -priv / DEP_YEARS : 0;
         // debt service: grace = interest only, then annuity over the remaining tenor
         y.interest = -bal * r;
@@ -58,10 +63,15 @@
         y.ds = -(y.interest + y.principal);
         y.dscr = y.ds > 0.01 ? y.cfads / y.ds : null;
         y.cfEq = y.cfads + y.interest + y.principal;
+        // príjem holdingu pôvodcu: licenčný poplatok + nesený podiel na kladnom cash flow vlastného kapitálu
+        y.founder = -y.royalty + q.carry / 100 * Math.max(0, y.cfEq);
       }
       y.balance = bal;
       rows.push(y);
     }
+    var fFee = capex * q.orig / 100, fRoy = -rows[CONSTR + 2].royalty, fRoyTotal = 0, fDiv = 0;
+    rows.forEach(function (y) { fRoyTotal += -y.royalty; if (y.phase === 'prevádzka') fDiv += q.carry / 100 * Math.max(0, y.cfEq); });
+    var fTotal = fFee + fRoyTotal + fDiv;
     var cum = 0, cumEq = 0, payback = null, paybackEq = null;
     rows.forEach(function (y, i) {
       var prev = cum; cum += y.cfProj; y.cum = cum;
@@ -75,7 +85,8 @@
       rows: rows, capex: capex, grant: grant, priv: priv, debt: debt, equity: equity,
       irrProj: irr(cfP), irrEq: irr(cfE), npv: npv(cfP, q.disc / 100), payback: payback, paybackEq: paybackEq,
       dscrMin: ds.length ? Math.min.apply(null, ds) : null, dscrAvg: ds.length ? ds.reduce(function (a, b) { return a + b; }, 0) / ds.length : null,
-      ebitda3: rows[CONSTR + 2].ebitda, rev3: rows[CONSTR + 2].rev
+      ebitda3: rows[CONSTR + 2].ebitda, rev3: rows[CONSTR + 2].rev,
+      fFee: fFee, fRoy: fRoy, fRoyTotal: fRoyTotal, fDiv: fDiv, fTotal: fTotal, sites: q.sites
     };
   }
   function npv(cf, r) { return cf.reduce(function (s, c, i) { return s + c / Math.pow(1 + r, i); }, 0); }
@@ -93,6 +104,7 @@
   function render() {
     var q = p(), m = run(q); last = m;
     IDS.forEach(function (k) { set('o-' + k, f.n(q[k], DEC[k] || 0) + UNITS[k]); });
+    set('o-sites', f.n(q.sites) + (q.sites === 1 ? ' lokalita' : q.sites < 5 ? ' lokality' : ' lokalít'));
     set('k-irr', m.irrProj === null ? 'n/a' : f.n(m.irrProj * 100, 1) + ' %');
     set('k-irreq', m.irrEq === null ? 'n/a' : f.n(m.irrEq * 100, 1) + ' %');
     set('k-npv', f.n(m.npv, 1));
@@ -103,6 +115,9 @@
     set('k-margin3', m.rev3 > 0 ? f.n(m.ebitda3 / m.rev3 * 100) + ' %' : 'n/a');
     set('k-capex', f.n(m.capex, 0)); set('k-grant', f.n(m.grant, 1)); set('k-debt', f.n(m.debt, 1)); set('k-equity', f.n(m.equity, 1));
     var b = $('k-dscr-badge'); if (b) { var ok = m.dscrMin !== null && m.dscrMin >= 1.2; b.textContent = ok ? 'DSCR nad 1,20 v každom roku' : 'DSCR pod 1,20 v niektorom roku'; b.className = 'badge ' + (ok ? 'ok' : 'warn'); }
+    set('f-fee', f.n(m.fFee, 2)); set('f-roy', f.n(m.fRoy * 1000, 0)); set('f-roytotal', f.n(m.fRoyTotal, 2));
+    set('f-div', f.n(m.fDiv, 1)); set('f-total', f.n(m.fTotal, 1)); set('f-prog', f.n(m.fTotal * m.sites, 1)); set('f-sites', f.n(m.sites));
+    set('f-avg', f.n(m.fTotal * m.sites / 25 * 1000, 0));
     drawCharts(m);
     drawTable(m);
   }
@@ -204,8 +219,9 @@
   // ---------- table ----------
   var COLS = [
     ['year', 'Rok', 0], ['occ', 'Obsad.', 'pct'], ['rev', 'Výnosy', 1], ['ebitda', 'EBITDA', 1], ['capex', 'CAPEX', 1], ['grant', 'Grant', 1],
+    ['royalty', 'Licenčný popl.', 2], ['orig', 'Odmena za prípravu', 1],
     ['dep', 'Odpisy', 1], ['taxU', 'Daň (projekt)', 1], ['cfProj', 'CF projektu', 1], ['cum', 'Kumul. CF', 1],
-    ['draw', 'Čerpanie dlhu', 1], ['interest', 'Úrok', 1], ['principal', 'Istina', 1], ['dscr', 'DSCR', 2], ['cfEq', 'CF equity', 1]
+    ['draw', 'Čerpanie dlhu', 1], ['interest', 'Úrok', 1], ['principal', 'Istina', 1], ['dscr', 'DSCR', 2], ['cfEq', 'CF vl. kapitálu', 1], ['founder', 'Príjem holdingu', 2]
   ];
   function drawTable(m) {
     var head = $('t-head'), body = $('t-body'); head.innerHTML = ''; body.innerHTML = '';
@@ -226,12 +242,13 @@
   function aoa() {
     var q = p(), m = last || run(q);
     var inputs = [['Kaskáda: 25-ročný model, vstupy'], ['Parameter', 'Hodnota', 'Jednotka']];
-    var LAB = { mw: 'IT výkon', capex: 'CAPEX na MW IT', grant: 'Grantová zložka', debt: 'Podiel dlhu na súkromnom kapitáli', rate: 'Úrok', tenor: 'Splatnosť dlhu', grace: 'Odklad istiny', occ1: 'Obsadenosť rok 1', occ2: 'Obsadenosť rok 2', occmax: 'Obsadenosť od roku 3', util: 'Vyťaženie predanej kapacity', colo: 'Cena kolokácie', heatp: 'Cena tepla', heatgwh: 'Teplo do CZT pri 10 MW a 90 %', elp: 'Cena elektriny (PPA)', cop: 'COP tepelného čerpadla', fix: 'Fixné prevádzkové náklady', escrev: 'Rast výnosov a cien energie', escop: 'Rast fixných nákladov', tax: 'Daň z príjmu', disc: 'Diskontná sadzba pre NPV' };
+    var LAB = { mw: 'IT výkon', capex: 'Investícia na MW IT', grant: 'Grantová zložka', debt: 'Podiel dlhu na súkromnom kapitáli', rate: 'Úrok', tenor: 'Splatnosť dlhu', grace: 'Odklad istiny', occ1: 'Obsadenosť rok 1', occ2: 'Obsadenosť rok 2', occmax: 'Obsadenosť od roku 3', util: 'Vyťaženie predanej kapacity', colo: 'Cena kolokácie', heatp: 'Cena tepla', heatgwh: 'Teplo do CZT pri 10 MW a 90 %', elp: 'Cena elektriny (PPA)', cop: 'COP tepelného čerpadla', fix: 'Fixné prevádzkové náklady', escrev: 'Rast výnosov a cien energie', escop: 'Rast fixných nákladov', tax: 'Daň z príjmu', disc: 'Diskontná sadzba pre NPV', orig: 'Odmena holdingu pôvodcu za prípravu (pri uzavretí financovania)', roy: 'Licenčný poplatok holdingu pôvodcu z dodaného tepla', carry: 'Nesený podiel holdingu pôvodcu na cash flow vlastného kapitálu', sites: 'Počet lokalít v programe (pre príjem holdingu)' };
     IDS.forEach(function (k) { inputs.push([LAB[k], q[k], UNITS[k].trim()]); });
     inputs.push([]); inputs.push(['Odvodené']); inputs.push(['CAPEX spolu', m.capex, 'mil. €'], ['Grant', m.grant, 'mil. €'], ['Dlh', m.debt, 'mil. €'], ['Vlastný kapitál', m.equity, 'mil. €']);
     inputs.push([]); inputs.push(['Výsledky']); inputs.push(['IRR projektu (po zdanení, s grantom)', m.irrProj, '1 = 100 %'], ['IRR vlastného kapitálu', m.irrEq, '1 = 100 %'], ['NPV pri diskontnej sadzbe', m.npv, 'mil. €'], ['Návratnosť súkromného kapitálu', m.payback, 'rokov prevádzky'], ['DSCR minimum', m.dscrMin, ''], ['DSCR priemer', m.dscrAvg, '']);
+    inputs.push([]); inputs.push(['Príjem holdingu pôvodcu, jedna lokalita']); inputs.push(['Odmena za prípravu (jednorazovo)', m.fFee, 'mil. €'], ['Licenčný poplatok v roku 3', m.fRoy, 'mil. €/rok'], ['Licenčný poplatok za 25 rokov', m.fRoyTotal, 'mil. €'], ['Nesený podiel za 25 rokov', m.fDiv, 'mil. €'], ['Spolu za 25 rokov, jedna lokalita', m.fTotal, 'mil. €'], ['Spolu za 25 rokov, ' + m.sites + ' lokalít', m.fTotal * m.sites, 'mil. €']);
     inputs.push([]); inputs.push(['Metodika: odpisy 20 rokov zo základu zníženého o grant; daň s prenosom straty; dlh anuitný po odklade istiny; bez zostatkovej hodnoty, DPH a pracovného kapitálu. CC BY 4.0, https://github.com/Pupno/kaskada']);
-    var FULL = [['year', 'Rok'], ['phase', 'Fáza'], ['occ', 'Obsadenosť'], ['revColo', 'Výnosy kolokácia'], ['revHeat', 'Výnosy teplo'], ['revOther', 'Výnosy ostatné'], ['rev', 'Výnosy spolu'], ['heatGwh', 'Teplo GWh'], ['elGwh', 'Elektrina GWh'], ['costEl', 'Náklady elektrina'], ['costFix', 'Náklady fixné'], ['ebitda', 'EBITDA'], ['capex', 'CAPEX'], ['grant', 'Grant'], ['dep', 'Odpisy'], ['taxU', 'Daň projekt'], ['cfProj', 'CF projektu po zdanení'], ['cum', 'Kumulovaný CF projektu'], ['draw', 'Čerpanie dlhu'], ['interest', 'Úrok'], ['principal', 'Istina'], ['balance', 'Zostatok dlhu'], ['taxL', 'Daň equity'], ['cfads', 'CFADS'], ['ds', 'Dlhová služba'], ['dscr', 'DSCR'], ['cfEq', 'CF equity'], ['cumEq', 'Kumulovaný CF equity']];
+    var FULL = [['year', 'Rok'], ['phase', 'Fáza'], ['occ', 'Obsadenosť'], ['revColo', 'Výnosy kolokácia'], ['revHeat', 'Výnosy teplo'], ['revOther', 'Výnosy ostatné'], ['rev', 'Výnosy spolu'], ['heatGwh', 'Teplo GWh'], ['elGwh', 'Elektrina GWh'], ['costEl', 'Náklady elektrina'], ['costFix', 'Náklady fixné'], ['royalty', 'Licenčný poplatok holdingu'], ['ebitda', 'EBITDA'], ['capex', 'Investícia'], ['grant', 'Grant'], ['orig', 'Odmena holdingu za prípravu'], ['dep', 'Odpisy'], ['taxU', 'Daň projekt'], ['cfProj', 'CF projektu po zdanení'], ['cum', 'Kumulovaný CF projektu'], ['draw', 'Čerpanie dlhu'], ['interest', 'Úrok'], ['principal', 'Istina'], ['balance', 'Zostatok dlhu'], ['taxL', 'Daň vlastný kapitál'], ['cfads', 'CFADS'], ['ds', 'Dlhová služba'], ['dscr', 'DSCR'], ['cfEq', 'CF vlastného kapitálu'], ['cumEq', 'Kumulovaný CF vlastného kapitálu'], ['founder', 'Príjem holdingu pôvodcu']];
     var table = [FULL.map(function (c) { return c[1]; })];
     m.rows.forEach(function (y) { table.push(FULL.map(function (c) { var v = y[c[0]]; return v === null || v === undefined ? '' : v; })); });
     return { inputs: inputs, table: table };

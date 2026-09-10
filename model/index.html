@@ -89,6 +89,13 @@
       <div class="ctl"><label for="i-tax">Daň z príjmu <output id="o-tax"></output></label><input id="i-tax" type="range" min="0" max="30" step="1" value="21"></div>
       <div class="ctl"><label for="i-disc">Diskontná sadzba pre NPV <output id="o-disc"></output></label><input id="i-disc" type="range" min="2" max="12" step="0.5" value="6"></div>
     </div>
+    <div class="ctl-group">
+      <div class="g">Holding pôvodcu projektu</div>
+      <div class="ctl"><label for="i-orig">Odmena za prípravu projektu <output id="o-orig"></output></label><input id="i-orig" type="range" min="0" max="5" step="0.5" value="2.5"><div class="hint">Vypláca sa pri uzavretí financovania; v odbore bežné 2 až 3 % investície.</div></div>
+      <div class="ctl"><label for="i-roy">Licenčný poplatok z tepla <output id="o-roy"></output></label><input id="i-roy" type="range" min="0" max="2" step="0.05" value="0.5"><div class="hint">Z každej dodanej MWh počas celej prevádzky.</div></div>
+      <div class="ctl"><label for="i-carry">Nesený podiel na vlastnom kapitáli <output id="o-carry"></output></label><input id="i-carry" type="range" min="0" max="25" step="1" value="12"><div class="hint">Podiel bez vkladu kapitálu, bez ručenia a bez funkcie v orgánoch.</div></div>
+      <div class="ctl"><label for="i-sites">Počet lokalít v programe <output id="o-sites"></output></label><input id="i-sites" type="range" min="1" max="8" step="1" value="1"><div class="hint">Len pre výpočet príjmu holdingu; ostatné výsledky sú za jednu lokalitu.</div></div>
+    </div>
   </form>
 
   <div class="results">
@@ -117,6 +124,16 @@
     </div>
     <p class="muted" style="font-size:12.5px">Modrozelené stĺpce sú kladný cash flow, oranžové záporný (výstavba). Hodnoty po rokoch sú v tabuľke nižšie a v exporte.</p>
 
+    <h3 class="small-cap">Príjem holdingu pôvodcu projektu</h3>
+    <p>Pôvodca projektu vlastní značku, dokumenty a memorandá cez vlastný holding a projektovej spoločnosti ich licencuje. Tieto sumy sú náklad projektu a sú už zahrnuté v IRR a DSCR vyššie, takže investor ich vidí od začiatku. Podmienky sú v <a href="../dokumenty/sablony/#zakladatelska">šablóne zakladateľskej a licenčnej dohody</a>.</p>
+    <div class="kpi-grid">
+      <div class="kpi"><span class="k">Odmena za prípravu</span><span class="v num"><span id="f-fee">…</span><span class="unit">mil. €</span></span><span class="sub">jednorazovo pri uzavretí financovania (2028)</span></div>
+      <div class="kpi"><span class="k">Licenčný poplatok</span><span class="v num"><span id="f-roy">…</span><span class="unit">tis. €/rok</span></span><span class="sub">v 3. roku prevádzky; za 25 rokov <span id="f-roytotal">…</span> mil. €</span></div>
+      <div class="kpi"><span class="k">Nesený podiel</span><span class="v num"><span id="f-div">…</span><span class="unit">mil. €</span></span><span class="sub">podiel na kladnom cash flow vlastného kapitálu za 25 rokov</span></div>
+      <div class="kpi"><span class="k">Spolu, jedna lokalita</span><span class="v num"><span id="f-total">…</span><span class="unit">mil. €</span></span><span class="sub">za 25 rokov, nominálne</span></div>
+      <div class="kpi" style="grid-column: span 2"><span class="k">Spolu, program</span><span class="v num"><span id="f-prog">…</span><span class="unit">mil. €</span></span><span class="sub"><span id="f-sites">…</span> lokalít za 25 rokov, v priemere <span id="f-avg">…</span> tis. € ročne; ďalšie lokality pribúdajú postupne, skutočný tok je nižší na začiatku a vyšší neskôr</span></div>
+    </div>
+
     <div class="btn-row">
       <button class="btn accent" type="button" id="btn-xlsx">Stiahnuť .xlsx</button>
       <button class="btn" type="button" id="btn-csv">Stiahnuť .csv</button>
@@ -135,7 +152,7 @@
 
 <div class="callout">
   <span class="lbl">Čo model zámerne nerobí</span>
-  Nepočíta zostatkovú hodnotu po 25 rokoch (konzervatívne), DPH, pracovný kapitál ani rezervný účet dlhovej služby. Nemodeluje hodinový profil odberu tepla; letný nesúlad je v hodnote 48 GWh paušálne. Grant je účtovaný ako zníženie vstupnej ceny majetku, čo znižuje odpisy a zvyšuje daň; alternatívne účtovanie (výnos budúcich období) dáva rovnaký cash flow. Vstupy sú modelové, nie ponuky dodávateľov.
+  Nepočíta zostatkovú hodnotu po 25 rokoch (konzervatívne), DPH, pracovný kapitál ani rezervný účet dlhovej služby. Nemodeluje hodinový profil odberu tepla; letný nesúlad je v hodnote 48 GWh paušálne. Grant je účtovaný ako zníženie vstupnej ceny majetku, čo znižuje odpisy a zvyšuje daň; alternatívne účtovanie (výnos budúcich období) dáva rovnaký cash flow. Nesený podiel holdingu je zjednodušený ako podiel na kladnom cash flow vlastného kapitálu v danom roku; skutočné dividendy závisia od rozhodnutia valného zhromaždenia a od podmienok bánk. Vstupy sú modelové, nie ponuky dodávateľov.
 </div>
 
 <footer class="foot">

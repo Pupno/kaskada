@@ -10,7 +10,7 @@
 | Teplo do CZT | 48 GWh/rok, ~5 000 domácností, 8 760 h/rok |
 | Vyhnuté emisie | 26,8 kt CO₂e/rok, 670 kt za 25 rokov |
 | Investícia | 95 mil. €, grant 40 % (Modernizačný fond, Innovation Fund, Program Slovensko), EIB 44 %, equity 16 % |
-| Návratnosť | IRR 13,8 % (grant 40 %), ~10 % (grant 15 %, len tepelná časť), 7,8 % bez grantu |
+| Návratnosť | IRR projektu ~11,7 % (grant 40 %), ~8,5 % (grant 15 %, len tepelná časť), ~7,3 % bez grantu; z otvoreného 25-ročného modelu |
 | Prvý krok | Fáza 0: kontajner 300 kW pri mestskej plavárni, 0,35 až 0,45 mil. €, bez licencie ÚRSO, výsledok za sezónu |
 | Cena tepla | náklad ~52 €/MWh (elektrina / (COP − 1) + kapitál TČ) vs. regulovaný plyn 93,4 €/MWh (ÚRSO 2025) |
 | Parametre | PUE 1,15 · ERF 0,65 · WUE 0,05 l/kWh · COP 3,4 · 100 % OZE |
@@ -20,10 +20,12 @@
 | Stránka | Obsah |
 |---|---|
 | [Návrh](./index.html) | Investičný prospekt: súhrn a stav projektu, kontext so slovenskými trhovými číslami a precedensmi (Infomaniak D4, Stockholm, Deep Green), technický koncept s diagramom a riadiacim vzorcom ceny tepla, KPI, lokalita, environmentálny dopad, financovanie s dvoma scenármi grantov, regulačná mapa (657/2004, ÚRSO, pripojenie, EIA, EED), ekonomika, partneri a kapitál, harmonogram s fázou 0, riziká a kritériá ukončenia, merateľnosť |
-| [Kalkulačka](./kalkulacka/) | Interaktívny model: IT výkon → elektrina → rekuperované teplo → tepelné čerpadlo → teplo do CZT → emisie, ekonomika, národný rozsah. Štyri presety vrátane pesimistického bez grantu |
+| [Kalkulačka](./kalkulacka/) | Rýchly model: IT výkon → elektrina → rekuperované teplo → tepelné čerpadlo → teplo do CZT → emisie, náklad tepla, jednoduchá návratnosť, národný rozsah. Šesť presetov vrátane pilotu 300 kW |
+| [Model](./model/) | Otvorený 25-ročný cash-flow model: 21 vstupov, IRR projektu aj vlastného kapitálu, NPV, návratnosť, DSCR po rokoch, tri grafy so spoločným krížom, tabuľka po rokoch, export do .xlsx a .csv |
 | [Lokality](./lokality/) | Jedenásť slovenských miest (šesť MHTH) hodnotených šiestimi váženými kritériami, vlastník CZT, kandidáti na fázu 0, interaktívna mapa |
 | [Financovanie](./financovanie/) | Dvanásť nástrojov EÚ a SR vrátane ELENA/TARGET, EBRD/SIH a schémy pre účinné CZT; tri scenáre grantov; čo granty nefinancujú; pravidlá kumulácie a štátnej pomoci |
 | [Pre štát](./pre-stat/) | Politický návrh: čo štát získa (vrátane toho, že cez MHTH už vlastní odberateľa), deväť opatrení s gestorom a nástrojom, národný program do 2035, čo nežiadame, odpovede na námietky vrátane cenového auditu ÚRSO |
+| [Dokumenty](./dokumenty/) | [Materiál na rokovanie](./dokumenty/material/) (predkladacia správa, návrh uznesenia s deviatimi úlohami, doložka vybraných vplyvov s fiskálnou bilanciou: ~3,6 € verejných príjmov za 1 € grantu SR za 25 rokov) a [šablóny](./dokumenty/sablony/) memoranda o spolupráci, LOI na odber tepla a term sheetu 15-ročnej zmluvy o dodávke tepla (HTML aj Markdown) |
 | [Metodika](./metodika/) | Vzorce, predpoklady, zdroje (EED 2023/1791, taxonómia 2021/2139, ISO/IEC 30134), obmedzenia modelu |
 | [EN](./en/) | Anglický súhrn pre Innovation Fund a EIB |
 

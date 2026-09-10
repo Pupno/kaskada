@@ -25,9 +25,11 @@
   <div class="nav-links">
     <a href="./">Návrh</a>
     <a href="./kalkulacka/">Kalkulačka</a>
+    <a href="./model/">Model</a>
     <a href="./lokality/">Lokality</a>
     <a href="./financovanie/">Financovanie</a>
     <a href="./pre-stat/">Pre štát</a>
+    <a href="./dokumenty/">Dokumenty</a>
     <a href="./metodika/">Metodika</a>
     <a class="lang" href="./en/">EN</a>
     <a class="gh" href="https://github.com/Pupno/kaskada">GitHub</a>
@@ -64,7 +66,7 @@
     <h2>Priemyselné teplo z digitálnej infraštruktúry, prvýkrát na Slovensku ako verejná služba.</h2>
     <p class="lead">Kaskáda je modulárne dátové centrum navrhnuté od základu tak, aby jeho odpadové teplo nekončilo v chladiacich vežiach, ale vstupovalo do siete centrálneho zásobovania teplom.</p>
     <p>Slovenské teplárne sú pod dvojitým tlakom: odklon od uhlia a plynu a rastúca cena emisných kvót. Súčasne rastie európsky dopyt po suverénnej výpočtovej kapacite, ktorá spĺňa environmentálne kritériá EÚ taxonómie. Kaskáda spája oba problémy do jedného riešenia: postaví komerčné kolokačné a cloudové centrum na 10 MW IT záťaže, ktorého 100 % kvapalinové chladenie odovzdá do mestskej siete teplo v teplotnom režime 85 až 95 °C.</p>
-    <p>Projekt je pripravený ako verejno-súkromné partnerstvo s existujúcim teplárenským podnikom; v šiestich najväčších mestách je ním štátny MH Teplárenský Holding. Predpokladaná investícia fázy 1 je <strong>95 mil. €</strong>. Grantová zložka je 15 % v konzervatívnom scenári (granty len na tepelnú časť a prípravu) až 40 % v ambicióznom (navyše Innovation Fund na integrovaný celok). IRR 13,8 % s plným grantom, približne 10 % v konzervatívnom scenári, 7,8 % bez grantu.</p>
+    <p>Projekt je pripravený ako verejno-súkromné partnerstvo s existujúcim teplárenským podnikom; v šiestich najväčších mestách je ním štátny MH Teplárenský Holding. Predpokladaná investícia fázy 1 je <strong>95 mil. €</strong>. Grantová zložka je 15 % v konzervatívnom scenári (granty len na tepelnú časť a prípravu) až 40 % v ambicióznom (navyše Innovation Fund na integrovaný celok). IRR projektu približne 11,7 % s plným grantom, 8,5 % v konzervatívnom scenári a 7,3 % bez grantu; všetko počíta <a href="./model/">otvorený 25-ročný model</a>, ktorý si stiahnete ako Excel.</p>
     <div class="callout">
       <span class="lbl">Prečo práve teraz</span>
       Smernica EÚ o energetickej efektívnosti 2023/1791 zavádza pre dátové centrá nad 500 kW povinný reporting (čl. 12) a nad 1 MW analýzu nákladov a prínosov využitia odpadového tepla s povinnosťou realizácie, ak je uskutočniteľná (čl. 26). Slovenská CZT je prevažne plynová, regulovaná variabilná zložka ceny tepla bola v roku 2025 v priemere 93,4 €/MWh, a Modernizačný fond musí svoju obálku minúť do roku 2030. Tri hodiny, ktoré začali tikať naraz.
@@ -264,9 +266,9 @@
       <table>
         <thead><tr><th>Scenár grantov</th><th class="num">Granty</th><th class="num">Podiel CAPEX</th><th class="num">IRR</th><th>Predpoklad</th></tr></thead>
         <tbody>
-          <tr><td><strong>Konzervatívny</strong></td><td class="num">~14 mil. €</td><td class="num">15 %</td><td class="num">~10 %</td><td><em>granty len na tepelnú časť (40 až 60 % z 24 mil. €) a prípravu (ELENA)</em></td></tr>
-          <tr><td><strong>Ambiciózny</strong></td><td class="num">38 mil. €</td><td class="num">40 %</td><td class="num">13,8 %</td><td><em>navyše Innovation Fund na integrovaný celok a Program Slovensko na R&amp;D a OZE</em></td></tr>
-          <tr><td>Bez grantu</td><td class="num">0</td><td class="num">0 %</td><td class="num">7,8 %</td><td><em>pod investičným prahom pri tomto riziku</em></td></tr>
+          <tr><td><strong>Konzervatívny</strong></td><td class="num">~14 mil. €</td><td class="num">15 %</td><td class="num">~8,5 %</td><td><em>granty len na tepelnú časť (40 až 60 % z 24 mil. €) a prípravu (ELENA)</em></td></tr>
+          <tr><td><strong>Ambiciózny</strong></td><td class="num">38 mil. €</td><td class="num">40 %</td><td class="num">~11,7 %</td><td><em>navyše Innovation Fund na integrovaný celok a Program Slovensko na R&amp;D a OZE</em></td></tr>
+          <tr><td>Bez grantu</td><td class="num">0</td><td class="num">0 %</td><td class="num">~7,3 %</td><td><em>pod investičným prahom pri tomto riziku; presné hodnoty počíta <a href="./model/">model</a></em></td></tr>
         </tbody>
       </table>
     </div>
@@ -308,36 +310,36 @@
           <tr><td>Výnosy z predaja tepla</td><td class="num">2,2</td><td><em>48 GWh × 45 €/MWh, konzervatívne; pri 70 €/MWh 3,4</em></td></tr>
           <tr><td>Ostatné (konektivita, služby)</td><td class="num">0,6</td><td><em>cross-connect, remote hands</em></td></tr>
           <tr class="total"><td>Výnosy spolu</td><td class="num pos">24,4</td><td></td></tr>
-          <tr><td>Elektrina (PPA)</td><td class="num">−6,7</td><td><em>74 GWh × 90 €/MWh</em></td></tr>
+          <tr><td>Elektrina dátového centra (PPA)</td><td class="num">−6,9</td><td><em>77 GWh × 90 €/MWh (9 MW × 85 % vyťaženie × PUE 1,15)</em></td></tr>
+          <tr><td>Elektrina tepelných čerpadiel</td><td class="num">−1,3</td><td><em>14 GWh = 48 GWh tepla / COP 3,4</em></td></tr>
           <tr><td>Osobné náklady</td><td class="num">−2,8</td><td><em>45 FTE</em></td></tr>
           <tr><td>Údržba a náhradné diely</td><td class="num">−2,5</td><td></td></tr>
           <tr><td>Poistenie, správa, ostatné</td><td class="num">−1,2</td><td></td></tr>
-          <tr class="total"><td>EBITDA</td><td class="num pos">11,2</td><td><em>marža 45,9 %</em></td></tr>
+          <tr class="total"><td>EBITDA</td><td class="num pos">9,7</td><td><em>marža 39,7 %, v cenách 2026</em></td></tr>
         </tbody>
       </table>
     </div>
     <div class="grid-2">
       <div>
-        <h3 class="small-cap">Návratnosť (ambiciózny scenár grantov)</h3>
+        <h3 class="small-cap">Návratnosť (ambiciózny scenár grantov, z modelu)</h3>
         <ul class="plain">
-          <li><strong>IRR projektu</strong> 13,8 % (po zdanení, 25-ročný horizont)</li>
-          <li><strong>Payback</strong> súkromného kapitálu 6,4 roka</li>
-          <li><strong>NPV</strong> pri diskontnej sadzbe 6 %: 87 mil. €</li>
-          <li><strong>DSCR</strong> priemer 1,68, minimum 1,32 v roku 5</li>
+          <li><strong>IRR projektu</strong> približne 11,7 % (po zdanení, 25-ročný horizont, bez zostatkovej hodnoty)</li>
+          <li><strong>Návratnosť</strong> súkromného kapitálu približne 7,6 roka od začiatku prevádzky</li>
+          <li><strong>NPV</strong> pri diskontnej sadzbe 6 %: približne 53 mil. €</li>
+          <li><strong>DSCR</strong> minimum približne 1,4 v prvom roku (s ročným odkladom istiny), priemer okolo 2</li>
         </ul>
       </div>
       <div>
         <h3 class="small-cap">Citlivosť</h3>
         <ul class="plain">
-          <li><strong>Obsadenosť 75 % miesto 90 %:</strong> IRR klesá na 9,4 %</li>
-          <li><strong>Cena tepla 70 €/MWh miesto 45:</strong> EBITDA +1,2 mil. €, IRR rastie</li>
-          <li><strong>PPA elektrina 110 €/MWh:</strong> IRR klesá na 11,1 %</li>
-          <li><strong>Grant 15 % (len tepelná časť):</strong> IRR približne 10 %</li>
-          <li><strong>Bez grantovej zložky:</strong> IRR 7,8 %, pod investičným prahom</li>
+          <li><strong>Cena tepla 70 €/MWh miesto 45:</strong> EBITDA +1,2 mil. € ročne</li>
+          <li><strong>Grant 15 % (len tepelná časť):</strong> IRR približne 8,5 %</li>
+          <li><strong>Bez grantovej zložky:</strong> IRR približne 7,3 %, pod investičným prahom</li>
+          <li><strong>Obsadenosť 75 % a elektrina 110 €/MWh:</strong> preset „Stres“ v modeli</li>
         </ul>
       </div>
     </div>
-    <p>Posledné dva riadky sú kľúčový argument pre štát: bez grantu sa projekt nepostaví, s grantom sa postaví a štát získa daňové príjmy, pracovné miesta a dekarbonizovanú sústavu CZT. Vlastné scenáre si nastavíte v <a href="./kalkulacka/">kalkulačke</a>.</p>
+    <p>Posledné riadky sú kľúčový argument pre štát: bez grantu sa projekt nepostaví, s grantom sa postaví a štát získa daňové príjmy, pracovné miesta a dekarbonizovanú sústavu CZT. Všetky hodnoty sú z <a href="./model/">otvoreného 25-ročného modelu</a> (posuvníky, tabuľka po rokoch, export do Excelu); rýchle porovnanie scenárov je v <a href="./kalkulacka/">kalkulačke</a>.</p>
   </div>
 </section>
 
@@ -430,7 +432,7 @@
           <tr><td>Priama zamestnanosť (FTE)</td><td class="num">28</td><td class="num">45</td><td class="num">92</td><td class="num">92</td></tr>
           <tr><td>Konštrukčná zamestnanosť (osoborokov)</td><td class="num">210</td><td class="num">350</td><td class="num">780</td><td class="num">n/a</td></tr>
           <tr><td>Tržby (mil. €/rok)</td><td class="num">9,6</td><td class="num">24,4</td><td class="num">68</td><td class="num">68</td></tr>
-          <tr><td>Daňový výnos štátu (mil. €/rok)</td><td class="num">1,1</td><td class="num">3,4</td><td class="num">9,8</td><td class="num">9,8</td></tr>
+          <tr><td>Príjmy verejného sektora bez emisných kvót (mil. €/rok)</td><td class="num">1,2</td><td class="num">2,7</td><td class="num">8</td><td class="num">8</td></tr>
         </tbody>
       </table>
     </div>
@@ -454,7 +456,7 @@
       <li><strong>Cieľ v aktualizácii NECP</strong>: 300 GWh tepla z dátových centier do roku 2035.</li>
       <li><strong>Pilotný program pre mestské plavárne a aquaparky</strong>: výzva pre samosprávy na kontajnery do 500 kW s výmenníkom do okruhu teplej vody. Lacné, rýchle, viditeľné, bez licencie.</li>
     </ol>
-    <div class="btn-row"><a class="btn accent" href="./pre-stat/">Celý politický návrh a národný program</a></div>
+    <div class="btn-row"><a class="btn accent" href="./pre-stat/">Celý politický návrh a národný program</a><a class="btn" href="./dokumenty/material/">Materiál na rokovanie s doložkou vplyvov</a><a class="btn" href="./dokumenty/sablony/">Šablóny memoranda, LOI a HPA</a></div>
   </div>
 </section>
 

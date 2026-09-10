@@ -21,7 +21,7 @@
     <span>Kaskáda / SK</span>
   </a>
   <div class="nav-links">
-    <a href="../">Návrh</a><a href="../kalkulacka/">Kalkulačka</a><a href="../lokality/">Lokality</a><a href="../financovanie/">Financovanie</a><a href="../pre-stat/">Pre štát</a><a href="./">Metodika</a><a class="lang" href="../en/">EN</a><a class="gh" href="https://github.com/Pupno/kaskada">GitHub</a>
+    <a href="../">Návrh</a><a href="../kalkulacka/">Kalkulačka</a><a href="../model/">Model</a><a href="../lokality/">Lokality</a><a href="../financovanie/">Financovanie</a><a href="../pre-stat/">Pre štát</a><a href="../dokumenty/">Dokumenty</a><a href="./">Metodika</a><a class="lang" href="../en/">EN</a><a class="gh" href="https://github.com/Pupno/kaskada">GitHub</a>
     <button class="btn" type="button" data-theme-toggle aria-label="Prepnúť tmavý režim" style="padding:6px 10px">Režim</button>
   </div>
 </nav>
@@ -61,7 +61,7 @@
     <h3 class="small-cap">Riadiaci vzorec ceny tepla</h3>
     <div class="formula">c_teplo_náklad ≈ c_el / (COP − 1) + kapitál a údržba TČ<br>= 90 / (3,4 − 1) + 14 ≈ 37,5 + 14 ≈ 52 €/MWh</div>
     <p>Teplo je zadarmo, platí sa len za teplotný zdvih. Pri COP 3,4 spotrebuje tepelné čerpadlo 1 MWh elektriny na každých 3,4 MWh dodaného tepla, z čoho 2,4 MWh je odpadové teplo zo serverov; elektrická zložka nákladu je teda c_el / (COP − 1). Kapitálová zložka vychádza z 0,7 až 1 mil. € na MW tepelných pri 20-ročných odpisoch. Referencia, voči ktorej sa predáva, je regulovaná cena tepla z plynu (93,4 €/MWh): predaj za 55 až 70 €/MWh dáva odberateľovi úsporu 25 až 40 % a výrobcovi maržu. V severských trhoch, kde tepláreň platí 35 až 45 €/MWh, ten istý vzorec maržu nedáva, a preto je tento model slovenský, nie univerzálny. Riziko: cenová regulácia ÚRSO je nákladovo auditovaná a maržu môže neuznať; pozri Regulačná mapa v návrhu.</p>
-    <p>IRR, NPV a DSCR v prospekte pochádzajú z podrobného 25-ročného cash-flow modelu s odpismi, daňou 21 %, úrokom 4,2 % a rastom cien 2 % ročne. Kalkulačka na stránke počíta len jednoduchú návratnosť a je zámerne priehľadná.</p>
+    <p>IRR, NPV, návratnosť a DSCR v prospekte pochádzajú z <a href="../model/">otvoreného 25-ročného modelu</a> na tejto stránke (<code>assets/js/model.js</code>): výstavba 2 roky (40 / 60 % CAPEX), prevádzka 25 rokov, obsadenosť 50 / 80 / 90 %, odpisy 20 rokov zo základu zníženého o grant, daň 21 % s prenosom straty, dlh 74 % súkromného kapitálu pri 4,2 % na 15 rokov s ročným odkladom istiny, rast výnosov a cien energie 2 % a fixných nákladov 2,5 % ročne, bez zostatkovej hodnoty. Elektrina tepelných čerpadiel (teplo / COP) je samostatný náklad. Kalkulačka počíta len jednoduchú návratnosť a je zámerne priehľadná.</p>
   </div>
 </section>
 

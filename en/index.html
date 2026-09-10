@@ -20,7 +20,7 @@
     <span>Kaskáda / EN</span>
   </a>
   <div class="nav-links">
-    <a href="./">Proposal</a><a href="../kalkulacka/">Calculator (SK)</a><a href="../lokality/">Sites (SK)</a><a href="../financovanie/">Funding (SK)</a><a href="../pre-stat/">Policy (SK)</a><a href="../metodika/">Method (SK)</a><a class="lang" href="../">SK</a><a class="gh" href="https://github.com/Pupno/kaskada">GitHub</a>
+    <a href="./">Proposal</a><a href="../kalkulacka/">Calculator (SK)</a><a href="../model/">25-year model (SK)</a><a href="../lokality/">Sites (SK)</a><a href="../financovanie/">Funding (SK)</a><a href="../pre-stat/">Policy (SK)</a><a href="../dokumenty/">Documents (SK)</a><a href="../metodika/">Method (SK)</a><a class="lang" href="../">SK</a><a class="gh" href="https://github.com/Pupno/kaskada">GitHub</a>
     <button class="btn" type="button" data-theme-toggle aria-label="Toggle dark mode" style="padding:6px 10px">Theme</button>
   </div>
 </nav>
@@ -49,7 +49,7 @@
     <h2>Industrial heat from digital infrastructure, delivered as a public service.</h2>
     <p class="lead">Kaskáda is a modular data centre designed from the ground up so that its waste heat enters the district heating network instead of the atmosphere.</p>
     <p>Slovak district heating operators face a coal phase-out and rising ETS prices. At the same time, European demand for sovereign, taxonomy-aligned compute is growing. Kaskáda answers both with one asset: a 10 MW colocation and cloud facility with 100 % liquid cooling, whose waste heat is lifted by CO₂ heat pumps to 85 to 95 °C, the supply temperature of most Slovak primary hot-water networks.</p>
-    <p>The project is structured as a public-private partnership with the municipal heating utility. Phase 1 CAPEX is <strong>€95 M</strong> with a 40 % grant share combined from the Slovak Modernisation Fund, Programme Slovakia and the EU Innovation Fund. Private-capital payback 6 to 7 years, IRR 13.8 %.</p>
+    <p>The project is structured as a public-private partnership with the municipal heating utility. Phase 1 CAPEX is <strong>€95 M</strong> with a grant share of 15 % (conservative: thermal part only) to 40 % (ambitious: plus the EU Innovation Fund). Project IRR ≈ 11.7 % with the full grant, ≈ 8.5 % conservative, ≈ 7.3 % without grants; private-capital payback ≈ 7.6 years. All figures come from the <a href="../model/">open 25-year model</a>, downloadable as Excel.</p>
     <div class="callout"><span class="lbl">Why now</span>The recast Energy Efficiency Directive (EU) 2023/1791 requires data centres above 500 kW to report energy KPIs (Art. 12) and those above 1 MW to assess and, where feasible, implement waste-heat recovery (Art. 26). Slovak district heating is predominantly gas-fired: the regulated variable heat price averaged €93.4/MWh in 2025 (ÚRSO), while recovered data-centre heat can be delivered for roughly €52/MWh (electricity ÷ (COP − 1) plus heat-pump capital). The state-owned MH Teplárenský Holding serves ~320,000 households in six cities, so the heat buyer is already the state. And the Modernisation Fund must spend its Slovak envelope by 2030.</div>
     <div class="callout primary"><span class="lbl">Status, honestly</span>What exists: this proposal, the model, the data. What does not: a site, a licence, an anchor tenant, a signed heat offtake. The plan therefore opens with a 300 kW wedge pilot at a municipal pool (Deep Green model, under €0.5 M, no ÚRSO licence, revenue within 12 months) rather than a €95 M build.</div>
     <div class="callout green"><span class="lbl">Why it is open</span>The full proposal, data, model and sources are public under CC BY 4.0. Any utility, city or ministry can adopt it, change the assumptions in the calculator and apply it to its own site. The goal is not one project but a national programme.</div>
@@ -109,7 +109,7 @@
       <div class="stack-row green"><span class="lbl">EIB Green Loan / InvestEU<small>15-year senior debt</small></span><span class="amt">€42.0 M<small>44 %</small></span></div>
       <div class="stack-row"><span class="lbl">Equity<small>Strategic operator, financial partner, utility as minority shareholder</small></span><span class="amt">€15.0 M<small>16 %</small></span></div>
     </div>
-    <p>Each eligible cost is funded from exactly one source (no double funding). Taxonomy alignment in sections 8.1 (data centres) and 4.15 (district heating from waste heat) qualifies the project for green lending. EIB ELENA and TARGET technical assistance (up to 90 % of development costs, applied for with the municipality; precedent Partizánske 2024) cover the preparation phase outside this stack. Two grant scenarios: conservative (thermal part only, ~€14 M, 15 % of CAPEX, IRR ~10 %) and ambitious (plus Innovation Fund, €38 M, 40 %, IRR 13.8 %); without grants IRR is 7.8 %. Details: <a href="../financovanie/">Financovanie</a> and <code>data/funding.json</code>.</p>
+    <p>Each eligible cost is funded from exactly one source (no double funding). Taxonomy alignment in sections 8.1 (data centres) and 4.15 (district heating from waste heat) qualifies the project for green lending. EIB ELENA and TARGET technical assistance (up to 90 % of development costs, applied for with the municipality; precedent Partizánske 2024) cover the preparation phase outside this stack. Two grant scenarios: conservative (thermal part only, ~€14 M, 15 % of CAPEX, IRR ≈ 8.5 %) and ambitious (plus Innovation Fund, €38 M, 40 %, IRR ≈ 11.7 %); without grants IRR is ≈ 7.3 %. Details: <a href="../financovanie/">Financovanie</a> and <code>data/funding.json</code>.</p>
   </div>
 </section>
 
@@ -124,13 +124,14 @@
           <tr><td>Colocation and cloud revenue (10 MW × €200/kW/month × 90 %)</td><td class="num">21.6</td></tr>
           <tr><td>Heat sales (48 GWh × €45/MWh)</td><td class="num">2.2</td></tr>
           <tr><td>Other services</td><td class="num">0.6</td></tr>
-          <tr><td>Electricity (PPA, 74 GWh × €90/MWh)</td><td class="num">−6.7</td></tr>
+          <tr><td>Data-centre electricity (PPA, 77 GWh × €90/MWh)</td><td class="num">−6.9</td></tr>
+          <tr><td>Heat-pump electricity (14 GWh, 48 GWh heat / COP 3.4)</td><td class="num">−1.3</td></tr>
           <tr><td>Personnel, maintenance, admin</td><td class="num">−6.5</td></tr>
-          <tr class="total"><td>EBITDA (45.9 % margin)</td><td class="num pos">11.2</td></tr>
+          <tr class="total"><td>EBITDA (39.7 % margin)</td><td class="num pos">9.7</td></tr>
         </tbody>
       </table>
     </div>
-    <p>IRR 13.8 % with grant, 7.8 % without. The grant is the difference between "not built" and "built and paying taxes", which is precisely what the Modernisation Fund and Innovation Fund exist for.</p>
+    <p>Project IRR ≈ 11.7 % with the full grant, ≈ 7.3 % without. The grant is the difference between "not built" and "built and paying taxes", which is precisely what the Modernisation Fund and Innovation Fund exist for. Year-by-year figures, DSCR and the Excel export are in the <a href="../model/">model</a>.</p>
   </div>
 </section>
 

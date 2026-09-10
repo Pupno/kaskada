@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kaskáda: 25-ročný model</title>
+<meta name="description" content="Otvorený 25-ročný cash-flow model dátového centra s dodávkou tepla do CZT: IRR, NPV, DSCR, návratnosť, rok po roku, export do Excelu.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='1' y='1' width='18' height='18' fill='%23F1EDE1' stroke='%2314171F'/%3E%3Cpath d='M4 14 L8 8 L12 12 L16 6' fill='none' stroke='%23B85419' stroke-width='1.6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,0..100,0..1&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="../assets/css/site.css">
+<style>
+  .charts { position: relative; display: grid; gap: 14px; outline: none; }
+  .charts:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  .panel { background: var(--panel); border: 1px solid var(--rule); padding: 14px 16px 8px; }
+  .panel h3 { margin: 0 0 6px; }
+  .panel svg { display: block; width: 100%; height: auto; }
+  .tip { position: absolute; display: none; z-index: 5; pointer-events: none; background: var(--ground); border: 1px solid var(--rule-strong); padding: 10px 12px; min-width: 240px; font-size: 12.5px; box-shadow: 0 6px 20px rgba(0,0,0,.12); }
+  .tip-h { font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 6px; }
+  .tip-r { display: flex; justify-content: space-between; gap: 14px; padding: 2px 0; }
+  .tip-r b { font-variant-numeric: tabular-nums; color: var(--ink); }
+  .tip-r span { color: var(--ink-mute); }
+  .kpi .v.num { font-family: var(--sans); font-weight: 600; font-size: 28px; font-variant-numeric: normal; letter-spacing: -.01em; }
+  #t-body td, #t-head th { padding: 7px 10px 7px 0; font-size: 12.5px; }
+  .capital { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin: 14px 0 18px; }
+  .capital div { padding: 12px 12px 12px 0; border-right: 1px solid var(--rule); font-size: 13px; color: var(--ink-mute); }
+  .capital div:last-child { border-right: 0; }
+  .capital b { display: block; font-family: var(--mono); font-size: 15px; color: var(--ink); font-variant-numeric: tabular-nums; }
+  @media (max-width: 720px) { .capital { grid-template-columns: 1fr 1fr; } .capital div { border-right: 0; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+<nav class="nav" aria-label="Hlavná navigácia">
+  <a class="brand" href="../">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><rect x="1" y="1" width="18" height="18" fill="none" stroke="currentColor"/><path d="M4 14 L8 8 L12 12 L16 6" fill="none" stroke="#B85419" stroke-width="1.4"/><circle cx="16" cy="6" r="1.6" fill="#B85419"/></svg>
+    <span>Kaskáda / SK</span>
+  </a>
+  <div class="nav-links">
+    <a href="../">Návrh</a><a href="../kalkulacka/">Kalkulačka</a><a href="./">Model</a><a href="../lokality/">Lokality</a><a href="../financovanie/">Financovanie</a><a href="../pre-stat/">Pre štát</a><a href="../dokumenty/">Dokumenty</a><a href="../metodika/">Metodika</a><a class="lang" href="../en/">EN</a><a class="gh" href="https://github.com/Pupno/kaskada">GitHub</a>
+    <button class="btn" type="button" data-theme-toggle aria-label="Prepnúť tmavý režim" style="padding:6px 10px">Režim</button>
+  </div>
+</nav>
+
+<span class="eyebrow">Finančný model</span>
+<h1 class="page-title">Dvadsaťpäť rokov, rok po roku, s tlačidlom na Excel.</h1>
+<p class="lead">Toto je model, z ktorého pochádzajú IRR, NPV a DSCR v prospekte. Každý vstup je posuvník, každý výsledok sa prepočíta okamžite a celý ročný model si stiahnete ako .xlsx do grantovej žiadosti.</p>
+<p>Nominálne hodnoty v mil. €. Výstavba 2028 až 2029 (40 / 60 % CAPEX), prevádzka 2030 až 2054. Odpisy 20 rokov zo základu zníženého o grant, daň z príjmu s prenosom straty, dlh anuitný po odklade istiny, bez zostatkovej hodnoty, DPH a pracovného kapitálu. Vzorce sú v <code>assets/js/model.js</code>, sú krátke a dajú sa čítať.</p>
+
+<div class="btn-row">
+  <button class="btn" type="button" data-preset='{"grant":40,"heatp":45,"occmax":90,"elp":90}'>Ambiciózny (grant 40 %)</button>
+  <button class="btn" type="button" data-preset='{"grant":15,"heatp":45,"occmax":90,"elp":90}'>Konzervatívny (grant 15 %)</button>
+  <button class="btn" type="button" data-preset='{"grant":0,"heatp":45,"occmax":90,"elp":90}'>Bez grantu</button>
+  <button class="btn" type="button" data-preset='{"grant":40,"heatp":70,"occmax":90,"elp":90}'>Teplo za plyn −25 %</button>
+  <button class="btn" type="button" data-preset='{"grant":40,"heatp":45,"occmax":75,"elp":110}'>Stres: obsadenosť 75 %, elektrina 110</button>
+</div>
+
+<div class="calc">
+  <form class="controls" onsubmit="return false">
+    <div class="ctl-group">
+      <div class="g">Investícia a financovanie</div>
+      <div class="ctl"><label for="i-mw">IT výkon <output id="o-mw"></output></label><input id="i-mw" type="range" min="1" max="50" step="1" value="10"></div>
+      <div class="ctl"><label for="i-capex">CAPEX na MW IT <output id="o-capex"></output></label><input id="i-capex" type="range" min="4" max="14" step="0.1" value="9.5"></div>
+      <div class="ctl"><label for="i-grant">Grantová zložka <output id="o-grant"></output></label><input id="i-grant" type="range" min="0" max="60" step="1" value="40"><div class="hint">Konzervatívne 15 %, ambiciózne 40 %.</div></div>
+      <div class="ctl"><label for="i-debt">Dlh zo súkromného kapitálu <output id="o-debt"></output></label><input id="i-debt" type="range" min="0" max="85" step="1" value="74"><div class="hint">74 % = 42 mil. € dlhu a 15 mil. € equity pri grante 40 %.</div></div>
+      <div class="ctl"><label for="i-rate">Úrok <output id="o-rate"></output></label><input id="i-rate" type="range" min="1" max="9" step="0.1" value="4.2"></div>
+      <div class="ctl"><label for="i-tenor">Splatnosť dlhu <output id="o-tenor"></output></label><input id="i-tenor" type="range" min="5" max="25" step="1" value="15"></div>
+      <div class="ctl"><label for="i-grace">Odklad istiny <output id="o-grace"></output></label><input id="i-grace" type="range" min="0" max="3" step="1" value="1"><div class="hint">Roky prevádzky, keď sa platí len úrok.</div></div>
+    </div>
+    <div class="ctl-group">
+      <div class="g">Prevádzka</div>
+      <div class="ctl"><label for="i-occ1">Obsadenosť rok 1 <output id="o-occ1"></output></label><input id="i-occ1" type="range" min="10" max="100" step="1" value="50"></div>
+      <div class="ctl"><label for="i-occ2">Obsadenosť rok 2 <output id="o-occ2"></output></label><input id="i-occ2" type="range" min="10" max="100" step="1" value="80"></div>
+      <div class="ctl"><label for="i-occmax">Obsadenosť od roku 3 <output id="o-occmax"></output></label><input id="i-occmax" type="range" min="40" max="100" step="1" value="90"></div>
+      <div class="ctl"><label for="i-util">Vyťaženie predanej kapacity <output id="o-util"></output></label><input id="i-util" type="range" min="50" max="100" step="1" value="85"><div class="hint">Skutočný odber IT voči zazmluvnenému výkonu.</div></div>
+      <div class="ctl"><label for="i-colo">Cena kolokácie <output id="o-colo"></output></label><input id="i-colo" type="range" min="100" max="300" step="5" value="200"></div>
+      <div class="ctl"><label for="i-heatp">Cena tepla <output id="o-heatp"></output></label><input id="i-heatp" type="range" min="15" max="95" step="1" value="45"><div class="hint">Regulovaný plyn 93,4 €/MWh (ÚRSO 2025).</div></div>
+      <div class="ctl"><label for="i-heatgwh">Teplo do CZT pri 10 MW a 90 % <output id="o-heatgwh"></output></label><input id="i-heatgwh" type="range" min="20" max="70" step="1" value="48"><div class="hint">Škáluje sa s výkonom a obsadenosťou.</div></div>
+      <div class="ctl"><label for="i-elp">Cena elektriny (PPA) <output id="o-elp"></output></label><input id="i-elp" type="range" min="50" max="180" step="1" value="90"></div>
+      <div class="ctl"><label for="i-cop">COP tepelného čerpadla <output id="o-cop"></output></label><input id="i-cop" type="range" min="2" max="5" step="0.1" value="3.4"></div>
+      <div class="ctl"><label for="i-fix">Fixné náklady na MW <output id="o-fix"></output></label><input id="i-fix" type="range" min="0.3" max="1.2" step="0.01" value="0.65"><div class="hint">Personál, údržba, poistenie, správa: 6,5 mil. € pri 10 MW.</div></div>
+    </div>
+    <div class="ctl-group">
+      <div class="g">Makro</div>
+      <div class="ctl"><label for="i-escrev">Rast výnosov a energie <output id="o-escrev"></output></label><input id="i-escrev" type="range" min="0" max="5" step="0.1" value="2"></div>
+      <div class="ctl"><label for="i-escop">Rast fixných nákladov <output id="o-escop"></output></label><input id="i-escop" type="range" min="0" max="6" step="0.1" value="2.5"></div>
+      <div class="ctl"><label for="i-tax">Daň z príjmu <output id="o-tax"></output></label><input id="i-tax" type="range" min="0" max="30" step="1" value="21"></div>
+      <div class="ctl"><label for="i-disc">Diskontná sadzba pre NPV <output id="o-disc"></output></label><input id="i-disc" type="range" min="2" max="12" step="0.5" value="6"></div>
+    </div>
+  </form>
+
+  <div class="results">
+    <h3 class="small-cap">Výsledky</h3>
+    <div class="kpi-grid">
+      <div class="kpi"><span class="k">IRR projektu</span><span class="v num" id="k-irr">…</span><span class="sub">po zdanení, s grantom, bez dlhu</span></div>
+      <div class="kpi"><span class="k">IRR vlastného kapitálu</span><span class="v num" id="k-irreq">…</span><span class="sub">po dlhovej službe</span></div>
+      <div class="kpi"><span class="k">NPV</span><span class="v num"><span id="k-npv">…</span><span class="unit">mil. €</span></span><span class="sub">pri zvolenej diskontnej sadzbe</span></div>
+      <div class="kpi"><span class="k">Návratnosť</span><span class="v num"><span id="k-payback">…</span><span class="unit">rokov</span></span><span class="sub">súkromného kapitálu, od začiatku prevádzky</span></div>
+      <div class="kpi"><span class="k">DSCR minimum</span><span class="v num" id="k-dscr">…</span><span class="sub">priemer <span id="k-dscravg">…</span></span></div>
+      <div class="kpi"><span class="k">EBITDA rok 3</span><span class="v num"><span id="k-ebitda3">…</span><span class="unit">mil. €</span></span><span class="sub">marža <span id="k-margin3">…</span></span></div>
+      <div class="kpi" style="grid-column: span 2"><span class="k">Bankovateľnosť</span><span class="v"><span id="k-dscr-badge" class="badge ok">…</span></span><span class="sub">banky typicky žiadajú DSCR aspoň 1,20 v každom roku</span></div>
+    </div>
+    <div class="capital">
+      <div>CAPEX<b><span id="k-capex">…</span> mil. €</b></div>
+      <div>Grant<b><span id="k-grant">…</span> mil. €</b></div>
+      <div>Dlh<b><span id="k-debt">…</span> mil. €</b></div>
+      <div>Vlastný kapitál<b><span id="k-equity">…</span> mil. €</b></div>
+    </div>
+
+    <div class="charts" id="charts" tabindex="0" aria-label="Grafy modelu; šípkami vľavo a vpravo prechádzate po rokoch">
+      <div class="panel"><h3 class="small-cap">Cash flow projektu po zdanení, mil. € za rok</h3><svg id="c1" role="img" aria-label="Ročný cash flow projektu"></svg></div>
+      <div class="panel"><h3 class="small-cap">Kumulovaný cash flow súkromného kapitálu, mil. €</h3><svg id="c2" role="img" aria-label="Kumulovaný cash flow"></svg></div>
+      <div class="panel"><h3 class="small-cap">DSCR, krytie dlhovej služby</h3><svg id="c3" role="img" aria-label="DSCR po rokoch"></svg></div>
+      <div class="tip" id="tip"></div>
+    </div>
+    <p class="muted" style="font-size:12.5px">Modrozelené stĺpce sú kladný cash flow, oranžové záporný (výstavba). Hodnoty po rokoch sú v tabuľke nižšie a v exporte.</p>
+
+    <div class="btn-row">
+      <button class="btn accent" type="button" id="btn-xlsx">Stiahnuť .xlsx</button>
+      <button class="btn" type="button" id="btn-csv">Stiahnuť .csv</button>
+      <span class="muted" id="export-note" style="font-size:12.5px;align-self:center"></span>
+    </div>
+  </div>
+</div>
+
+<h3 class="small-cap">Ročný model (mil. €)</h3>
+<div class="table-wrap">
+  <table>
+    <thead id="t-head"></thead>
+    <tbody id="t-body"></tbody>
+  </table>
+</div>
+
+<div class="callout">
+  <span class="lbl">Čo model zámerne nerobí</span>
+  Nepočíta zostatkovú hodnotu po 25 rokoch (konzervatívne), DPH, pracovný kapitál ani rezervný účet dlhovej služby. Nemodeluje hodinový profil odberu tepla; letný nesúlad je v hodnote 48 GWh paušálne. Grant je účtovaný ako zníženie vstupnej ceny majetku, čo znižuje odpisy a zvyšuje daň; alternatívne účtovanie (výnos budúcich období) dáva rovnaký cash flow. Vstupy sú modelové, nie ponuky dodávateľov.
+</div>
+
+<footer class="foot">
+  <span>Kaskáda / model v1.0</span>
+  <span>Otvorený model, CC BY 4.0. Upravte <code>assets/js/model.js</code> a pošlite pull request.</span>
+  <span><a href="https://github.com/Pupno/kaskada">GitHub</a></span>
+</footer>
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="../assets/js/site.js"></script>
+<script src="../assets/js/model.js"></script>
+</body>
+</html>

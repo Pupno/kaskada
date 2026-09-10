@@ -3,9 +3,9 @@
     "note": "Prehľad je orientačný. Intenzity pomoci a termíny výziev sa menia, pred podaním overte aktuálnu výzvu u riadiaceho orgánu. Pravidlo: jeden oprávnený náklad sa financuje len z jedného zdroja (zákaz dvojitého financovania). Granty nefinancujú servery ani IT vybavenie; výpočtová časť CAPEX stojí na vlastných výnosoch.",
     "date": "2026-09",
     "scenarios": {
-      "conservative": { "grants_meur": 14, "share": 0.15, "irr": 0.10, "basis": "granty len na tepelnú časť (40 až 60 % z 24 mil. €) a prípravu (ELENA/TARGET)" },
-      "ambitious": { "grants_meur": 38, "share": 0.40, "irr": 0.138, "basis": "navyše Innovation Fund na integrovaný celok a Program Slovensko na R&D a OZE" },
-      "none": { "grants_meur": 0, "share": 0, "irr": 0.078, "basis": "bez grantu" }
+      "conservative": { "grants_meur": 14, "share": 0.15, "irr_project_approx": 0.085, "basis": "granty len na tepelnú časť (40 až 60 % z 24 mil. €) a prípravu (ELENA/TARGET)" },
+      "ambitious": { "grants_meur": 38, "share": 0.40, "irr_project_approx": 0.117, "basis": "navyše Innovation Fund na integrovaný celok a Program Slovensko na R&D a OZE" },
+      "none": { "grants_meur": 0, "share": 0, "irr_project_approx": 0.073, "basis": "bez grantu; presné hodnoty počíta model/index.html" }
     }
   },
   "programs": [

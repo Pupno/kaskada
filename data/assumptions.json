@@ -116,12 +116,14 @@
     "revenue_heat_at_70": 3.4,
     "revenue_other": 0.6,
     "revenue_total": 24.4,
-    "cost_electricity": 6.7,
+    "cost_electricity_dc": 6.9,
+    "cost_electricity_heat_pumps": 1.3,
     "cost_personnel": 2.8,
     "cost_maintenance": 2.5,
     "cost_admin": 1.2,
-    "ebitda": 11.2,
-    "ebitda_margin": 0.459
+    "ebitda": 9.7,
+    "ebitda_margin": 0.397,
+    "note": "v cenách 2026; ročný model s eskaláciou je v model/index.html"
   },
   "prices": {
     "colocation_eur_per_kw_month": 200,
@@ -131,13 +133,15 @@
     "fte": 45
   },
   "returns": {
-    "irr_after_tax_ambitious": 0.138,
-    "irr_conservative_grant": 0.10,
-    "irr_no_grant": 0.078,
-    "payback_years_private": 6.4,
-    "npv_6pct_meur": 87,
-    "dscr_avg": 1.68,
-    "dscr_min": 1.32
+    "source": "model/index.html (assets/js/model.js), hodnoty približné, model je smerodajný",
+    "irr_project_ambitious": 0.117,
+    "irr_project_conservative_grant": 0.085,
+    "irr_project_no_grant": 0.073,
+    "payback_years_private_from_cod": 7.6,
+    "npv_6pct_meur": 53,
+    "dscr_min": 1.4,
+    "dscr_avg": 2.0,
+    "debt_terms": { "share_of_private_capital": 0.74, "rate": 0.042, "tenor_years": 15, "grace_years": 1 }
   },
   "jobs": {
     "construction_person_years": 350,

@@ -1,0 +1,34 @@
+name: Oprava faktu alebo čísla
+description: Niečo v návrhu, modeli alebo financovaní nesedí
+title: "[Oprava] "
+labels: ["oprava"]
+body:
+  - type: input
+    id: kde
+    attributes:
+      label: Kde (stránka a odsek, alebo súbor a riadok)
+      placeholder: napr. financovanie/, tabuľka programov, riadok Innovation Fund
+    validations:
+      required: true
+  - type: textarea
+    id: co
+    attributes:
+      label: Čo je zle a ako to má byť
+    validations:
+      required: true
+  - type: textarea
+    id: zdroj
+    attributes:
+      label: Zdroj
+      description: Odkaz alebo citácia dokumentu, z ktorého oprava vychádza.
+    validations:
+      required: true
+  - type: dropdown
+    id: dopad
+    attributes:
+      label: Dopad
+      options:
+        - Preklep alebo formulácia
+        - Číslo v texte
+        - Predpoklad modelu (mení výsledky)
+        - Právny alebo regulačný fakt

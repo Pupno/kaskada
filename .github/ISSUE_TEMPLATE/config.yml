@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Stránka projektu
+    url: https://pupno.github.io/kaskada/
+    about: Návrh, model, lokality, financovanie, dokumenty
+  - name: Tím a zapojenie
+    url: https://pupno.github.io/kaskada/tim/
+    about: Otvorené role, čo ponúkame, ako konzorcium funguje

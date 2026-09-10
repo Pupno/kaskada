@@ -1,0 +1,45 @@
+name: Nová lokalita alebo oprava údajov o meste
+description: Navrhni mesto do hodnotenia alebo oprav skóre a údaje v data/locations.json
+title: "[Lokalita] "
+labels: ["lokalita", "data"]
+body:
+  - type: input
+    id: mesto
+    attributes:
+      label: Mesto
+    validations:
+      required: true
+  - type: dropdown
+    id: typ
+    attributes:
+      label: Čo navrhuješ
+      options:
+        - Pridať nové mesto
+        - Opraviť skóre alebo údaje existujúceho mesta
+        - Navrhnúť plaváreň / aquapark pre fázu 0
+    validations:
+      required: true
+  - type: textarea
+    id: udaje
+    attributes:
+      label: Údaje o sústave CZT
+      description: Ročný odber (GWh), podiel letného odberu, palivový mix, vlastník zdrojov, plán odstavenia, vzdialenosť k 110 kV rozvodni, optika. Čo nevieš, nechaj prázdne.
+      placeholder: |
+        Odber:
+        Letný odber (podiel):
+        Palivový mix:
+        Vlastník:
+        Rozvodňa 110 kV (km):
+        Optika:
+  - type: textarea
+    id: zdroj
+    attributes:
+      label: Zdroj údajov
+      description: Odkaz na dokument, koncepciu mesta, výročnú správu teplárne alebo rozhodnutie ÚRSO. Bez zdroja skóre nemeníme.
+    validations:
+      required: true
+  - type: textarea
+    id: skore
+    attributes:
+      label: Navrhované skóre 1 až 5 (nepovinné)
+      placeholder: "czt_demand: , decarb_pressure: , grid: , connectivity: , land: , municipal: "

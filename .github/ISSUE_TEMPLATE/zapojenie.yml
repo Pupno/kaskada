@@ -1,0 +1,70 @@
+name: Chcem sa zapojiť
+description: Ponuka spolupráce alebo členstva v konzorciu Kaskáda
+title: "[Zapojenie] "
+labels: ["zapojenie"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Ďakujeme. Otvorené role a čo ponúkame sú na https://pupno.github.io/kaskada/tim/. Toto issue je verejné; kontaktné údaje, ktoré nechceš zverejniť, napíš len ako „pošlem súkromne“ a ozveme sa.
+  - type: dropdown
+    id: rola
+    attributes:
+      label: Rola, ktorá ti sedí najviac
+      options:
+        - Právnik pre štátnu pomoc a reguláciu
+        - Teplárenský inžinier
+        - Partner v meste alebo teplárni
+        - Grantový konzultant
+        - Finančník pre projektové financovanie
+        - Prevádzkovateľ dátových centier / CTO
+        - Verejné politiky a komunikácia
+        - Vývojár a dátový analytik
+        - Iné (opíšem nižšie)
+    validations:
+      required: true
+  - type: textarea
+    id: skusenosti
+    attributes:
+      label: Skúsenosti a čo prinášaš
+      description: Stručne, 5 až 10 riadkov. Konkrétne projekty, sústavy CZT, výzvy, s ktorými si pracoval/a.
+    validations:
+      required: true
+  - type: dropdown
+    id: cas
+    attributes:
+      label: Koľko času vieš dať
+      options:
+        - Jednorazová konzultácia
+        - Pár hodín mesačne
+        - Deň v týždni
+        - Naplno
+    validations:
+      required: true
+  - type: dropdown
+    id: forma
+    attributes:
+      label: Forma zapojenia
+      options:
+        - Člen konzorcia (podiel podľa vkladu)
+        - Dodávateľ alebo poradca (platená práca po získaní financií)
+        - Dobrovoľník / spoluautor otvoreného návrhu
+        - Partner za inštitúciu (mesto, tepláreň, univerzita, firma)
+  - type: input
+    id: mesto
+    attributes:
+      label: Mesto alebo sústava CZT, ku ktorej máš vzťah (nepovinné)
+  - type: input
+    id: kontakt
+    attributes:
+      label: Kontakt
+      description: E-mail alebo LinkedIn; ak nechceš zverejniť, napíš „pošlem súkromne“.
+    validations:
+      required: true
+  - type: checkboxes
+    id: suhlas
+    attributes:
+      label: Potvrdenie
+      options:
+        - label: Prečítal/a som stránku Tím a zapojenie a rozumiem, že projekt dnes nemá financie a prvé peniaze prídu z ELENA alebo pre-seed kola.
+          required: true

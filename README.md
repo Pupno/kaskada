@@ -26,6 +26,7 @@
 | [Financovanie](./financovanie/) | Dvanásť nástrojov EÚ a SR vrátane ELENA/TARGET, EBRD/SIH a schémy pre účinné CZT; tri scenáre grantov; čo granty nefinancujú; pravidlá kumulácie a štátnej pomoci |
 | [Pre štát](./pre-stat/) | Politický návrh: čo štát získa (vrátane toho, že cez MHTH už vlastní odberateľa), deväť opatrení s gestorom a nástrojom, národný program do 2035, čo nežiadame, odpovede na námietky vrátane cenového auditu ÚRSO |
 | [Dokumenty](./dokumenty/) | [Materiál na rokovanie](./dokumenty/material/) (predkladacia správa, návrh uznesenia s deviatimi úlohami, doložka vybraných vplyvov s fiskálnou bilanciou: ~3,6 € verejných príjmov za 1 € grantu SR za 25 rokov) a [šablóny](./dokumenty/sablony/) memoranda o spolupráci, LOI na odber tepla a term sheetu 15-ročnej zmluvy o dodávke tepla (HTML aj Markdown) |
+| [Tím](./tim/) | Osem otvorených rolí s prvou úlohou a ponukou, ako konzorcium funguje, ako sa zapojiť (issue šablóny) |
 | [Metodika](./metodika/) | Vzorce, predpoklady, zdroje (EED 2023/1791, taxonómia 2021/2139, ISO/IEC 30134), obmedzenia modelu |
 | [EN](./en/) | Anglický súhrn pre Innovation Fund a EIB |
 
@@ -34,6 +35,10 @@ Otvorené dáta: [`data/assumptions.json`](./data/assumptions.json), [`data/loca
 ## Prečo je to otvorený projekt
 
 Cieľom nie je jeden projekt, ale replikovateľný model. Ktorákoľvek tepláreň, mesto alebo ministerstvo si môže návrh vziať, upraviť predpoklady a použiť pre vlastnú lokalitu. Pripomienky a opravy: issues alebo pull request, pozri [CONTRIBUTING.md](./CONTRIBUTING.md).
+
+## Zapoj sa
+
+Konzorcium je v zakladaní a hľadá právnika pre štátnu pomoc a reguláciu ÚRSO, teplárenského inžiniera, partnera v meste alebo teplárni, grantového konzultanta, finančníka, prevádzkovateľa dátových centier, človeka pre verejné politiky a vývojára. Čo ponúkame a ako to funguje: [tim/](./tim/). Prihlásenie: Issues → New issue → **Chcem sa zapojiť**.
 
 ## Lokálne spustenie
 

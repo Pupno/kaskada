@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "Ak tento návrh citujete, použite prosím nasledujúce údaje."
+title: "Kaskáda: dátové centrum ako mestská tepláreň. Investičný a politický návrh pre Slovensko"
+version: "1.0"
+date-released: "2026-09-10"
+license: "CC-BY-4.0"
+type: dataset
+abstract: "Otvorený projektový návrh modulárneho dátového centra s kvapalinovým chladením, ktorého odpadové teplo je cez CO2 tepelné čerpadlá dodávané do siete centrálneho zásobovania teplom. Obsahuje technický koncept, lokalitnú analýzu ôsmich slovenských miest, emisný a ekonomický model, stratégiu financovania z fondov EÚ a odporúčania pre štát."
+keywords:
+  - data centre
+  - waste heat recovery
+  - district heating
+  - Slovakia
+  - Energy Efficiency Directive
+  - Modernisation Fund
+authors:
+  - name: "Konzorcium Kaskáda"

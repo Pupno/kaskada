@@ -1,0 +1,76 @@
+{
+  "_meta": {
+    "note": "Prehľad je orientačný. Intenzity pomoci a termíny výziev sa menia, pred podaním overte aktuálnu výzvu u riadiaceho orgánu. Pravidlo: jeden oprávnený náklad sa financuje len z jedného zdroja (zákaz dvojitého financovania).",
+    "date": "2026-09"
+  },
+  "programs": [
+    {
+      "id": "mf", "level": "SK / EÚ ETS", "name": "Modernizačný fond",
+      "authority": "MŽP SR, SIEA (implementácia), EIB (hodnotenie)",
+      "covers": "Tepelné čerpadlá, integrácia odpadového tepla do CZT, akumulácia tepla, rozvody",
+      "intensity": "typicky 40 až 60 % oprávnených nákladov dekarbonizačnej časti",
+      "fit": 5, "phase": "Fáza 2 (2027 H1)", "amount_meur": 18.0,
+      "why": "Prioritná oblasť fondu je dekarbonizácia teplárenstva. Odpadové teplo z DC je nový, doteraz nevyužívaný zdroj v SR.",
+      "url": "https://www.minzp.sk"
+    },
+    {
+      "id": "if", "level": "EÚ", "name": "Innovation Fund (Small-scale)",
+      "authority": "CINEA, Európska komisia",
+      "covers": "Inovatívna časť: prvé komerčné nasadenie CO2 tepelných čerpadiel pre DC v CEE, riadenie kaskády",
+      "intensity": "do 60 % relevantných nákladov (small-scale: CAPEX 2,5 až 20 mil. €)",
+      "fit": 4, "phase": "Fáza 2 (2027)", "amount_meur": 10.5,
+      "why": "Hodnotí stupeň inovácie, potenciál vyhnutých emisií a replikovateľnosť. Kaskáda je navrhnutá ako replikovateľný model pre 8 miest.",
+      "url": "https://cinea.ec.europa.eu"
+    },
+    {
+      "id": "ps1", "level": "SK / EÚ", "name": "Program Slovensko 2021–2027, priorita 1",
+      "authority": "MIRRI SR",
+      "covers": "Výskumno-vývojová a digitálna zložka: monitoring, riadiaci systém, spolupráca s univerzitami",
+      "intensity": "podľa schémy štátnej pomoci, typicky 25 až 50 %",
+      "fit": 3, "phase": "Fáza 2 až 3", "amount_meur": 6.0,
+      "why": "Cieľ politiky 1: inteligentnejšia Európa. Suverénna digitálna infraštruktúra je explicitná priorita.",
+      "url": "https://www.mirri.gov.sk"
+    },
+    {
+      "id": "ps2", "level": "SK / EÚ", "name": "Program Slovensko 2021–2027, priorita 2",
+      "authority": "MIRRI SR, SIEA",
+      "covers": "Energetická efektívnosť, obnoviteľné zdroje na mieste (FV strecha, akumulácia elektriny)",
+      "intensity": "typicky 35 až 60 % pre energetické opatrenia",
+      "fit": 3, "phase": "Fáza 3", "amount_meur": 3.5,
+      "why": "Cieľ politiky 2: zelenšia Európa. On-site OZE a efektívnosť sú štandardné oprávnené aktivity.",
+      "url": "https://www.siea.sk"
+    },
+    {
+      "id": "eib", "level": "EÚ", "name": "EIB Green Loan / InvestEU",
+      "authority": "Európska investičná banka",
+      "covers": "Dlhodobý dlh na hlavnú časť CAPEX",
+      "intensity": "do 50 % celkových nákladov projektu, 15 až 20 rokov",
+      "fit": 5, "phase": "Fáza 3 (financial close)", "amount_meur": 42.0,
+      "why": "Projekt spĺňa taxonómiu v dvoch sektoroch, čo je kvalifikačný predpoklad pre zelený úver. Grantová zložka znižuje riziko pre banku.",
+      "url": "https://www.eib.org"
+    },
+    {
+      "id": "he", "level": "EÚ", "name": "Horizon Europe, Cluster 5",
+      "authority": "Európska komisia",
+      "covers": "Samostatný výskumný projekt: real-time COP optimalizácia, prediktívne riadenie odberu tepla",
+      "intensity": "100 % pre výskumné organizácie, 70 % pre podniky",
+      "fit": 3, "phase": "Paralelne, 2027 až 2030", "amount_meur": 2.4,
+      "why": "Nie je súčasťou CAPEX. Zvyšuje kredibilitu projektu a prináša univerzitných partnerov (STU, ŽU, SAV).",
+      "url": "https://cinea.ec.europa.eu"
+    },
+    {
+      "id": "ipcei", "level": "EÚ", "name": "IPCEI Next Generation Cloud Infrastructure and Services",
+      "authority": "Európska komisia, členské štáty",
+      "covers": "Možná budúca notifikácia pre fázu 2 a 3 (viac lokalít ako federovaný edge-cloud)",
+      "intensity": "individuálna notifikácia štátnej pomoci",
+      "fit": 2, "phase": "Fáza 2+ (2029+)", "amount_meur": 0,
+      "why": "Relevantné až pri národnom programe viacerých lokalít. Uvádzame pre úplnosť.",
+      "url": "https://competition-policy.ec.europa.eu"
+    }
+  ],
+  "state_aid_notes": [
+    "Regionálna investičná pomoc: Žilinský a Košický kraj sú v mape regionálnej pomoci SR s vyššou maximálnou intenzitou než Bratislavský kraj.",
+    "Environmentálna pomoc (GBER čl. 41, 46): opatrenia energetickej efektívnosti a CZT majú vlastné stropy intenzity, kumulácia je možná do stropu pre daný náklad.",
+    "Innovation Fund a Modernizačný fond sú fondy EÚ ETS, nie štrukturálne fondy; kumulácia s Programom Slovensko je možná, ak sa nefinancuje ten istý náklad."
+  ]
+}

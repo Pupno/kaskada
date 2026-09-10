@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kaskáda: kalkulačka</title>
-<meta name="description" content="Interaktívny model: IT výkon dátového centra, rekuperované teplo, tepelné čerpadlo, teplo do CZT, vyhnuté emisie, ekonomika a národný rozsah.">
+<meta name="description" content="Interaktívny model: IT výkon dátového centra, získané teplo, tepelné čerpadlo, teplo do CZT, usporené emisie, ekonomika a národný rozsah.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='1' y='1' width='18' height='18' fill='%23F1EDE1' stroke='%2314171F'/%3E%3Cpath d='M4 14 L8 8 L12 12 L16 6' fill='none' stroke='%23B85419' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,7 +45,7 @@
       <div class="g">Technika</div>
       <div class="ctl"><label for="i-mw">IT výkon <output id="o-mw"></output></label><input id="i-mw" type="range" min="0.3" max="50" step="0.1" value="10"><div class="hint">Inštalovaný IT výkon jednej lokality; 0,3 MW = kontajner fázy 0.</div></div>
       <div class="ctl"><label for="i-util">Vyťaženie IT <output id="o-util"></output></label><input id="i-util" type="range" min="50" max="100" step="1" value="85"></div>
-      <div class="ctl"><label for="i-erf">ERF, podiel tepla na rekuperáciu <output id="o-erf"></output></label><input id="i-erf" type="range" min="0.30" max="0.80" step="0.01" value="0.65"><div class="hint">Vzduchové chladenie 0,3 až 0,45; kvapalinové 0,6 až 0,75.</div></div>
+      <div class="ctl"><label for="i-erf">ERF, podiel energie využitej ako teplo <output id="o-erf"></output></label><input id="i-erf" type="range" min="0.30" max="0.80" step="0.01" value="0.65"><div class="hint">Vzduchové chladenie 0,3 až 0,45; kvapalinové 0,6 až 0,75.</div></div>
       <div class="ctl"><label for="i-cop">COP tepelného čerpadla <output id="o-cop"></output></label><input id="i-cop" type="range" min="2.0" max="5.0" step="0.1" value="3.4"><div class="hint">Zdvih z 60 na 90 °C: CO₂ TČ dosahuje 3,0 až 3,8.</div></div>
       <div class="ctl"><label for="i-avail">Dostupnosť dodávky tepla <output id="o-avail"></output></label><input id="i-avail" type="range" min="60" max="100" step="1" value="85"></div>
     </div>
@@ -80,15 +80,15 @@
     <h3 class="small-cap">Energetická bilancia jednej lokality</h3>
     <div class="kpi-grid">
       <div class="kpi"><span class="k">Elektrina celkom</span><span class="v num"><span id="r-el">0</span><span class="unit">GWh/rok</span></span><span class="sub">IT × PUE 1,15</span></div>
-      <div class="kpi"><span class="k">Rekuperované teplo</span><span class="v num"><span id="r-heatin">0</span><span class="unit">GWh/rok</span></span><span class="sub">pri 55 až 65 °C</span></div>
-      <div class="kpi"><span class="k">Teplo do CZT</span><span class="v num"><span id="r-heatout">0</span><span class="unit">GWh/rok</span></span><span class="sub">pri 85 až 95 °C po TČ</span></div>
+      <div class="kpi"><span class="k">Získané odpadové teplo</span><span class="v num"><span id="r-heatin">0</span><span class="unit">GWh/rok</span></span><span class="sub">pri 55 až 65 °C</span></div>
+      <div class="kpi"><span class="k">Teplo do CZT</span><span class="v num"><span id="r-heatout">0</span><span class="unit">GWh/rok</span></span><span class="sub">pri 85 až 95 °C za tepelným čerpadlom</span></div>
       <div class="kpi"><span class="k">Domácnosti</span><span class="v num"><span id="r-hh">0</span></span><span class="sub">pri 10 MWh na domácnosť a rok</span></div>
     </div>
     <div class="flow"><svg id="flow-svg" role="img" aria-label="Tok energie: elektrina na vstupe, teplo na výstupe"></svg></div>
 
     <h3 class="small-cap">Klimatický dopad</h3>
     <div class="kpi-grid">
-      <div class="kpi"><span class="k">Vyhnuté emisie</span><span class="v num"><span id="r-co2">0</span><span class="unit">t CO₂e/rok</span></span><span class="sub">teplo + elektrina, netto po TČ</span></div>
+      <div class="kpi"><span class="k">Usporené emisie</span><span class="v num"><span id="r-co2">0</span><span class="unit">t CO₂e/rok</span></span><span class="sub">teplo + elektrina, po odpočítaní elektriny tepelných čerpadiel</span></div>
       <div class="kpi"><span class="k">Za 25 rokov</span><span class="v num"><span id="r-co2-25">0</span><span class="unit">kt CO₂e</span></span><span class="sub">životnosť zariadenia</span></div>
       <div class="kpi" style="grid-column: span 2"><span class="k">EÚ taxonómia</span><span class="v"><span id="r-tax" class="badge ok">…</span></span><span class="sub">8.1 dátové centrá (PUE, ERF), 4.15 CZT z odpadového tepla</span></div>
     </div>
@@ -106,11 +106,11 @@
     </div>
 
     <h3 class="small-cap">Národný rozsah</h3>
-    <p>Rovnaká lokalita replikovaná do <b id="n-sites">1</b> miest. Toto je číslo, ktoré patrí do aktualizácie Národného energetického a klimatického plánu.</p>
+    <p>Rovnaká lokalita zopakovaná v tomto počte miest: <b id="n-sites">1</b>. Toto číslo patrí do aktualizácie národného energetického a klimatického plánu.</p>
     <div class="kpi-grid">
       <div class="kpi"><span class="k">IT výkon spolu</span><span class="v num"><span id="n-mw">0</span><span class="unit">MW</span></span></div>
       <div class="kpi"><span class="k">Teplo do CZT</span><span class="v num"><span id="n-heat">0</span><span class="unit">GWh/rok</span></span><span class="sub">pre <span id="n-hh">0</span> domácností</span></div>
-      <div class="kpi"><span class="k">Vyhnuté emisie</span><span class="v num"><span id="n-co2">0</span><span class="unit">kt CO₂e/rok</span></span></div>
+      <div class="kpi"><span class="k">Usporené emisie</span><span class="v num"><span id="n-co2">0</span><span class="unit">kt CO₂e/rok</span></span></div>
       <div class="kpi"><span class="k">Investícia</span><span class="v num"><span id="n-capex">0</span><span class="unit">mil. €</span></span><span class="sub">z toho granty <span id="n-grant">0</span> mil. €, ~<span id="n-jobs">0</span> trvalých miest</span></div>
     </div>
     <div class="callout">

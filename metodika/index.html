@@ -37,7 +37,7 @@
     <div class="formula">E_IT = P_IT × u × 8 760 h<br>E_celkom = E_IT × PUE<br>Q_rek = E_IT × ERF<br>Q_CZT = Q_rek × COP / (COP − 1) × a<br>E_TČ = Q_CZT / COP</div>
     <p><strong>P_IT</strong> inštalovaný IT výkon (MW), <strong>u</strong> priemerné vyťaženie (0,85), <strong>PUE</strong> Power Usage Effectiveness (1,15), <strong>ERF</strong> Energy Reuse Factor podľa ISO/IEC 30134-6 (0,65), <strong>COP</strong> koeficient výkonu tepelného čerpadla pri zdvihu z 60 na 90 °C (3,4), <strong>a</strong> dostupnosť dodávky tepla (0,85).</p>
     <p>Fáza 1: E_IT = 10 × 0,85 × 8 760 = 74,5 GWh; Q_rek = 48,4 GWh; Q_CZT = 48,4 × 1,417 × 0,85 = 58,3 GWh. V prospekte uvádzame konzervatívne <strong>48 GWh</strong>, čo zodpovedá dodatočnej rezerve 18 % na nesúlad krivky odberu CZT v lete (časť tepla v júli a auguste nemá odberateľa, ak sústava nemá dostatočnú akumuláciu alebo absorpčné chladenie).</p>
-    <p>Zdvih tepelného čerpadla: teplo na výstupe = teplo na vstupe + práca kompresora. Pri COP 3,4 je z každých 2,4 kWh tepla na vstupe 3,4 kWh na výstupe za 1 kWh elektriny.</p>
+    <p>Zdvih tepelného čerpadla: teplo na výstupe = teplo na vstupe + práca kompresora. Pri COP 3,4 vzniká z 2,4 kWh odpadového tepla a 1 kWh elektriny 3,4 kWh tepla na výstupe.</p>
   </div>
 </section>
 
@@ -47,8 +47,8 @@
     <h2>Porovnanie voči základnému scenáru.</h2>
     <div class="formula">CO₂_teplo = Q_CZT × EF_CZT<br>CO₂_TČ = E_TČ × EF_el<br>CO₂_el = E_celkom × max(0, EF_sieť − EF_el)<br>CO₂_netto = CO₂_teplo − CO₂_TČ + CO₂_el</div>
     <p><strong>EF_CZT</strong> emisný faktor nahradeného tepla. Fáza 1 predpokladá 0,294 t CO₂/MWh pre modelový mix 65 % uhlie (0,34 t/MWh vrátane účinnosti kotla), 25 % zemný plyn (0,20), 10 % biomasa (0,02). <strong>EF_sieť</strong> priemerný faktor slovenskej elektrizačnej sústavy, konzervatívne 0,17 t/MWh (jadro a voda držia SK pod priemerom EÚ). <strong>EF_el</strong> faktor odoberanej elektriny: 0 pri PPA z nových OZE s garanciami pôvodu.</p>
-    <p>Započítanie vyhnutých emisií z elektriny je diskutabilné (aditivita PPA). Preto v prospekte uvádzame obe zložky oddelene a kalkulačka umožňuje EF_el nastaviť na sieťový mix, čím sa zložka vynuluje.</p>
-    <p>Lokálne znečisťujúce látky (NOx, SO₂, PM10) sú odhadnuté z emisných limitov pre stredné spaľovacie zariadenia na uhlie a sú uvedené rádovo.</p>
+    <p>Započítanie usporených emisií z elektriny je sporné (otázka, či zmluva PPA skutočne prináša nové obnoviteľné zdroje, tzv. aditivita). Preto v prospekte uvádzame obe zložky oddelene a kalkulačka umožňuje nastaviť EF_el na sieťový mix, čím sa táto zložka vynuluje.</p>
+    <p>Miestne znečisťujúce látky (NOx, SO₂, PM10) sú odhadnuté z emisných limitov pre stredné spaľovacie zariadenia na uhlie a uvádzame ich len rádovo.</p>
   </div>
 </section>
 
@@ -60,7 +60,7 @@
     <p><strong>c_kolo</strong> cena kolokácie 200 €/kW/mesiac (stredoeurópsky rozsah 150 až 280 pre Tier III), <strong>o</strong> obsadenosť 0,90 v roku 3, <strong>c_teplo</strong> 45 €/MWh (zámerne hlboko pod regulovanou variabilnou zložkou ceny tepla z plynu, 93,4 €/MWh v roku 2025 podľa ÚRSO), <strong>c_el</strong> 90 €/MWh z PPA. CAPEX 9,5 mil. € na MW IT zahŕňa tepelné čerpadlá a integráciu na CZT, ktoré bežné DC nemá (rádovo +2,4 mil. €/MW).</p>
     <h3 class="small-cap">Riadiaci vzorec ceny tepla</h3>
     <div class="formula">c_teplo_náklad ≈ c_el / (COP − 1) + kapitál a údržba TČ<br>= 90 / (3,4 − 1) + 14 ≈ 37,5 + 14 ≈ 52 €/MWh</div>
-    <p>Teplo je zadarmo, platí sa len za teplotný zdvih. Pri COP 3,4 spotrebuje tepelné čerpadlo 1 MWh elektriny na každých 3,4 MWh dodaného tepla, z čoho 2,4 MWh je odpadové teplo zo serverov; elektrická zložka nákladu je teda c_el / (COP − 1). Kapitálová zložka vychádza z 0,7 až 1 mil. € na MW tepelných pri 20-ročných odpisoch. Referencia, voči ktorej sa predáva, je regulovaná cena tepla z plynu (93,4 €/MWh): predaj za 55 až 70 €/MWh dáva odberateľovi úsporu 25 až 40 % a výrobcovi maržu. V severských trhoch, kde tepláreň platí 35 až 45 €/MWh, ten istý vzorec maržu nedáva, a preto je tento model slovenský, nie univerzálny. Riziko: cenová regulácia ÚRSO je nákladovo auditovaná a maržu môže neuznať; pozri Regulačná mapa v návrhu.</p>
+    <p>Teplo je zadarmo, platí sa len za teplotný zdvih. Pri COP 3,4 spotrebuje tepelné čerpadlo 1 MWh elektriny na každých 3,4 MWh dodaného tepla, z čoho 2,4 MWh je odpadové teplo zo serverov; elektrická zložka nákladu je teda c_el / (COP − 1). Kapitálová zložka vychádza z 0,7 až 1 mil. € na MW tepelných pri 20-ročných odpisoch. Referenciou, voči ktorej sa predáva, je regulovaná cena tepla z plynu (93,4 €/MWh): predaj za 55 až 70 €/MWh dáva odberateľovi úsporu 25 až 40 % a výrobcovi maržu. Na severských trhoch, kde tepláreň platí 35 až 45 €/MWh, ten istý vzorec maržu nedáva, a preto je tento model slovenský, nie univerzálny. Riziko: cenová regulácia ÚRSO je nákladovo auditovaná a maržu nemusí uznať; pozri Regulačnú mapu v návrhu.</p>
     <p>IRR, NPV, návratnosť a DSCR v prospekte pochádzajú z <a href="../model/">otvoreného 25-ročného modelu</a> na tejto stránke (<code>assets/js/model.js</code>): výstavba 2 roky (40 / 60 % CAPEX), prevádzka 25 rokov, obsadenosť 50 / 80 / 90 %, odpisy 20 rokov zo základu zníženého o grant, daň 21 % s prenosom straty, dlh 74 % súkromného kapitálu pri 4,2 % na 15 rokov s ročným odkladom istiny, rast výnosov a cien energie 2 % a fixných nákladov 2,5 % ročne, bez zostatkovej hodnoty. Elektrina tepelných čerpadiel (teplo / COP) je samostatný náklad. Kalkulačka počíta len jednoduchú návratnosť a je zámerne priehľadná.</p>
   </div>
 </section>
@@ -106,7 +106,7 @@
       <li><strong>Trh a náklady</strong>: <a href="https://www.datacentermap.com/slovakia/">Data Center Map, Slovensko</a>, <a href="https://reports.turnerandtownsend.com/data-centre-construction-cost-index-2025/data-centre-cost-trends">Turner &amp; Townsend, index nákladov DC 2025</a> (~10 mil. USD/MW), <a href="https://www.sciencedirect.com/science/article/pii/S1364032125005362">prehľadová štúdia 2025 o odpadovom teple DC v CZT</a> (COP 3,2 až 5,0).</li>
       <li><strong>Zákon a regulátor</strong>: <a href="https://www.slov-lex.sk/ezbierky/pravne-predpisy/SK/ZZ/2004/657/">zákon č. 657/2004 Z. z. o tepelnej energetike</a>, <a href="https://www.urso.gov.sk/povolenia-a-oznamenia/">ÚRSO, povolenia a oznámenia</a>.</li>
     </ul>
-    <p>Odkazy na výzvy a dokumenty sa menia; overte aktuálnu verziu. Trhové údaje o SR, precedensy a hlbšie odkazy sú prevzaté z otvoreného dossieru <a href="https://github.com/Mild-Solvent/heatcloud-slovakia">HeatCloud Slovakia</a> (Mild-Solvent, 2026), ktorému ďakujeme za research.</p>
+    <p>Odkazy na výzvy a dokumenty sa menia; overte si aktuálnu verziu. Trhové údaje o SR, precedensy a podrobnejšie odkazy sú prevzaté z otvoreného materiálu <a href="https://github.com/Mild-Solvent/heatcloud-slovakia">HeatCloud Slovakia</a> (Mild-Solvent, 2026), ktorému ďakujeme za rešerš.</p>
   </div>
 </section>
 
@@ -119,7 +119,7 @@
       <li><strong>Hydraulika siete.</strong> Kapacita primárneho horúcovodu v mieste pripojenia je predmetom štúdie s prevádzkovateľom.</li>
       <li><strong>Cena tepla.</strong> 45 €/MWh je zámerne konzervatívny návrh (regulovaná cena z plynu bola 93,4 €/MWh); ochota teplárne a postoj ÚRSO k marži sa líšia mesto od mesta a overia sa v právnom stanovisku pred založením spoločnosti.</li>
       <li><strong>Grantová intenzita.</strong> Ambiciózny scenár (40 %) predpokladá úspech v Innovation Fund; konzervatívny (15 %) počíta len s tepelnou časťou. Oprávnenosť súkromného prevádzkovateľa DC ako žiadateľa nie je potvrdená.</li>
-      <li><strong>Aditivita PPA.</strong> Vyhnuté emisie z elektriny sú metodicky sporné a uvádzame ich oddelene.</li>
+      <li><strong>Aditivita PPA.</strong> Usporené emisie z elektriny sú metodicky sporné a uvádzame ich oddelene.</li>
       <li><strong>Skóre lokalít</strong> sú odhady, nie merania.</li>
     </ul>
     <p>Vylepšenia sú vítané cez pull request. Najužitočnejšie: hodinové profily odberu konkrétnych sústav CZT a záväzné ponuky dodávateľov tepelných čerpadiel.</p>

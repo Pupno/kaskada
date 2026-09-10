@@ -34,6 +34,8 @@
   <button class="btn" type="button" data-preset='{"mw":10,"util":85,"erf":0.65,"cop":3.4,"avail":85,"efdh":0.294,"efel":0,"colo":200,"occ":90,"heatp":45,"elp":90,"capex":9.5,"grant":40,"sites":1}'>Fáza 1 Žilina</button>
   <button class="btn" type="button" data-preset='{"mw":30,"util":85,"erf":0.65,"cop":3.4,"avail":85,"efdh":0.294,"efel":0,"colo":190,"occ":88,"heatp":45,"elp":85,"capex":8.5,"grant":30,"sites":1}'>Rozšírenie 30 MW</button>
   <button class="btn" type="button" data-preset='{"mw":10,"util":85,"erf":0.65,"cop":3.4,"avail":85,"efdh":0.220,"efel":0,"colo":200,"occ":90,"heatp":45,"elp":90,"capex":9.5,"grant":40,"sites":8}'>Národný program, 8 miest</button>
+  <button class="btn" type="button" data-preset='{"mw":10,"util":85,"erf":0.65,"cop":3.4,"avail":85,"efdh":0.294,"efel":0,"colo":200,"occ":90,"heatp":70,"elp":90,"capex":9.5,"grant":15,"sites":1}'>Teplo za plyn −25 %, grant 15 %</button>
+  <button class="btn" type="button" data-preset='{"mw":0.3,"util":90,"erf":0.70,"cop":4.0,"avail":90,"efdh":0.202,"efel":0.17,"colo":120,"occ":80,"heatp":70,"elp":150,"capex":1.4,"grant":0,"sites":1}'>Fáza 0: pilot 300 kW na plavárni</button>
   <button class="btn" type="button" data-preset='{"mw":10,"util":85,"erf":0.40,"cop":3.0,"avail":80,"efdh":0.202,"efel":0.17,"colo":170,"occ":75,"heatp":38,"elp":110,"capex":10.5,"grant":0,"sites":1}'>Pesimistický, bez grantu</button>
 </div>
 
@@ -41,7 +43,7 @@
   <form class="controls" onsubmit="return false">
     <div class="ctl-group">
       <div class="g">Technika</div>
-      <div class="ctl"><label for="i-mw">IT výkon <output id="o-mw"></output></label><input id="i-mw" type="range" min="1" max="50" step="1" value="10"><div class="hint">Inštalovaný IT výkon jednej lokality.</div></div>
+      <div class="ctl"><label for="i-mw">IT výkon <output id="o-mw"></output></label><input id="i-mw" type="range" min="0.3" max="50" step="0.1" value="10"><div class="hint">Inštalovaný IT výkon jednej lokality; 0,3 MW = kontajner fázy 0.</div></div>
       <div class="ctl"><label for="i-util">Vyťaženie IT <output id="o-util"></output></label><input id="i-util" type="range" min="50" max="100" step="1" value="85"></div>
       <div class="ctl"><label for="i-erf">ERF, podiel tepla na rekuperáciu <output id="o-erf"></output></label><input id="i-erf" type="range" min="0.30" max="0.80" step="0.01" value="0.65"><div class="hint">Vzduchové chladenie 0,3 až 0,45; kvapalinové 0,6 až 0,75.</div></div>
       <div class="ctl"><label for="i-cop">COP tepelného čerpadla <output id="o-cop"></output></label><input id="i-cop" type="range" min="2.0" max="5.0" step="0.1" value="3.4"><div class="hint">Zdvih z 60 na 90 °C: CO₂ TČ dosahuje 3,0 až 3,8.</div></div>
@@ -56,9 +58,9 @@
       <div class="g">Ekonomika</div>
       <div class="ctl"><label for="i-colo">Cena kolokácie <output id="o-colo"></output></label><input id="i-colo" type="range" min="100" max="300" step="5" value="200"></div>
       <div class="ctl"><label for="i-occ">Obsadenosť <output id="o-occ"></output></label><input id="i-occ" type="range" min="40" max="100" step="1" value="90"></div>
-      <div class="ctl"><label for="i-heatp">Cena tepla pre CZT <output id="o-heatp"></output></label><input id="i-heatp" type="range" min="15" max="80" step="1" value="45"></div>
+      <div class="ctl"><label for="i-heatp">Cena tepla pre CZT <output id="o-heatp"></output></label><input id="i-heatp" type="range" min="15" max="95" step="1" value="45"><div class="hint">ÚRSO 2025: variabilná zložka z plynu 93,4 €/MWh. Plyn −25 % = 70. Severský odkup 35 až 45.</div></div>
       <div class="ctl"><label for="i-elp">Cena elektriny (PPA) <output id="o-elp"></output></label><input id="i-elp" type="range" min="50" max="180" step="1" value="90"></div>
-      <div class="ctl"><label for="i-capex">CAPEX na MW IT <output id="o-capex"></output></label><input id="i-capex" type="range" min="6" max="14" step="0.1" value="9.5"></div>
+      <div class="ctl"><label for="i-capex">CAPEX na MW IT <output id="o-capex"></output></label><input id="i-capex" type="range" min="1" max="14" step="0.1" value="9.5"><div class="hint">Európsky benchmark ~10 mil. USD/MW (T&amp;T 2025) + tepelná časť; kontajner fázy 0 ~1,4 mil. €/MW.</div></div>
       <div class="ctl"><label for="i-grant">Grantová zložka <output id="o-grant"></output></label><input id="i-grant" type="range" min="0" max="60" step="1" value="40"></div>
     </div>
     <div class="ctl-group">
@@ -68,6 +70,13 @@
   </form>
 
   <div class="results">
+    <h3 class="small-cap">Náklad dodaného tepla</h3>
+    <div class="kpi-grid">
+      <div class="kpi"><span class="k">Elektrina na zdvih</span><span class="v num"><span id="r-hc-el">0</span><span class="unit">€/MWh</span></span><span class="sub">cena elektriny / (COP − 1)</span></div>
+      <div class="kpi"><span class="k">Kapitál a údržba TČ</span><span class="v num">14<span class="unit">€/MWh</span></span><span class="sub">0,7 až 1 mil. € na MW tepelných</span></div>
+      <div class="kpi"><span class="k">Náklad spolu</span><span class="v num"><span id="r-hc">0</span><span class="unit">€/MWh</span></span><span class="sub">vs. plyn 93,4 €/MWh (ÚRSO 2025)</span></div>
+      <div class="kpi"><span class="k">Marža pri zvolenej cene</span><span class="v num"><span id="r-hc-margin">0</span><span class="unit">€/MWh</span></span><span class="sub">cena tepla mínus náklad</span></div>
+    </div>
     <h3 class="small-cap">Energetická bilancia jednej lokality</h3>
     <div class="kpi-grid">
       <div class="kpi"><span class="k">Elektrina celkom</span><span class="v num"><span id="r-el">0</span><span class="unit">GWh/rok</span></span><span class="sub">IT × PUE 1,15</span></div>

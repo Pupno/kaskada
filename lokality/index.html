@@ -27,8 +27,9 @@
 </nav>
 
 <span class="eyebrow">Lokalitná analýza</span>
-<h1 class="page-title">Osem miest, kde sa dátové centrum môže stať teplárňou.</h1>
-<p class="lead">Každé slovenské mesto so sústavou CZT nad 250 GWh ročného odberu je kandidát. Hodnotíme šesť kritérií s váhami a ukazujeme, kde má program začať.</p>
+<h1 class="page-title">Jedenásť miest, kde sa dátové centrum môže stať teplárňou.</h1>
+<p class="lead">Každé slovenské mesto so sústavou CZT nad 250 GWh ročného odberu je kandidát na plný blok; menšie mestá s aktívnym dekarbonizačným plánovaním sú kandidáti na fázu 0. Hodnotíme šesť kritérií s váhami a ukazujeme, kde má program začať.</p>
+<p>Šesť z hodnotených miest (Bratislava, Trnava, Martin, Žilina, Zvolen, Košice) má zdroje CZT vo vlastníctve štátneho MH Teplárenského Holdingu, spolu okolo 320 000 domácností. Pre štát to znamená, že odberateľa tepla už vlastní. Zvyšok sú mestské teplárne a súkromní prevádzkovatelia (Veolia, Engie, KOOR).</p>
 
 <div id="map" role="region" aria-label="Mapa kandidátskych miest"></div>
 <p class="muted" style="font-size:12.5px">Značky: veľkosť podľa váženého skóre, oranžová = odporúčaná fáza 1 a 2. Podkladová mapa OpenStreetMap.</p>
@@ -55,7 +56,15 @@
   <li><strong>110 kV rozvodňa</strong> do 5 km s voľnou kapacitou 15 MW (fáza 1) až 45 MW (rozšírenie).</li>
   <li><strong>Dve nezávislé optické trasy</strong> k národným uzlom a latencia pod 15 ms na Viedeň alebo Frankfurt.</li>
   <li><strong>Priemyselný pozemok 2 až 4 ha</strong> mimo záplavového územia, s existujúcim územným plánom pre technickú infraštruktúru.</li>
-  <li><strong>Memorandum s mestom a teplárňou</strong> podpísané pred podaním žiadosti o grant.</li>
+  <li><strong>Letný odber</strong> (teplá voda, priemysel, aquapark): teplo bez letného odberu má hodnotu len okolo 60 % nominálu.</li>
+  <li><strong>Memorandum s mestom a teplárňou</strong> podpísané pred podaním žiadosti o grant; pri mestách MHTH je partnerom štátny holding.</li>
+</ul>
+<h3 class="small-cap">Fáza 0: čo musí spĺňať plaváreň alebo aquapark</h3>
+<ul class="plain">
+  <li>Celoročný odber teplej vody aspoň 1,5 GWh/rok (kontajner 300 kW dodá rádovo 2 GWh/rok pri stálom chode).</li>
+  <li>Pripojenie 400 kW na NN alebo VN v areáli, optika aspoň 1 Gb/s (pre dávkové výpočty stačí).</li>
+  <li>Miesto na kontajner 12 m pri strojovni, prívod do okruhu teplej vody cez výmenník.</li>
+  <li>Ochota mesta uzavrieť trojročnú zmluvu na odber tepla za cenu plynu mínus 25 %.</li>
 </ul>
 
 <footer class="foot">
@@ -83,14 +92,14 @@
       var cells = '<td><strong>' + r.l.name + '</strong></td>';
       keys.forEach(function (k) { cells += '<td class="num">' + r.l.scores[k] + '</td>'; });
       cells += '<td class="num ' + (r.total >= 4 ? 'pos' : '') + '">' + f.n(r.total, 2) + '</td>';
-      cells += '<td>' + (r.l.phase === 1 ? 'Fáza 1' : r.l.phase === 2 ? 'Fáza 2' : 'Program') + '</td>';
+      cells += '<td>' + (r.l.phase === 1 ? 'Fáza 1' : r.l.phase === 2 ? 'Fáza 2' : r.l.phase === 0 ? 'Fáza 0 (pilot)' : 'Program') + '</td>';
       tr.innerHTML = cells; body.appendChild(tr);
     });
 
     var notes = document.getElementById('loc-notes');
     rows.forEach(function (r) {
       var div = document.createElement('div'); div.className = 'tile';
-      div.innerHTML = '<p class="t">' + r.l.name + ' <span class="mono muted" style="font-size:12px">' + f.n(r.total, 2) + '</span></p><p>' + r.l.note + '</p><p class="muted" style="font-size:12.5px">Odber CZT rádovo ' + f.n(r.l.heat_demand_gwh) + ' GWh/rok</p>';
+      div.innerHTML = '<p class="t">' + r.l.name + ' <span class="mono muted" style="font-size:12px">' + f.n(r.total, 2) + '</span></p><p>' + r.l.note + '</p><p class="muted" style="font-size:12.5px">Vlastník zdrojov CZT: ' + (r.l.owner || 'overiť') + ' · odber rádovo ' + f.n(r.l.heat_demand_gwh) + ' GWh/rok</p>';
       notes.appendChild(div);
     });
 
@@ -100,7 +109,7 @@
       var rec = r.l.recommended;
       L.circleMarker([r.l.lat, r.l.lng], { radius: 6 + (r.total - 2.5) * 6, color: rec ? '#B85419' : '#1E3A47', fillColor: rec ? '#E28954' : '#2C5C74', fillOpacity: .55, weight: 1.5 })
         .addTo(map)
-        .bindPopup('<b>' + r.l.name + '</b><br>Vážené skóre ' + f.n(r.total, 2) + ' / 5<br>' + (r.l.phase === 1 ? 'Odporúčaná primárna lokalita' : r.l.phase === 2 ? 'Fáza 2' : 'Kandidát národného programu') + '<br><span style="opacity:.75">' + r.l.note + '</span>');
+        .bindPopup('<b>' + r.l.name + '</b><br>Vážené skóre ' + f.n(r.total, 2) + ' / 5<br>' + (r.l.phase === 1 ? 'Odporúčaná primárna lokalita' : r.l.phase === 2 ? 'Fáza 2' : r.l.phase === 0 ? 'Kandidát na fázu 0 (pilot 300 kW)' : 'Kandidát národného programu') + '<br>Vlastník CZT: ' + (r.l.owner || 'overiť') + '<br><span style="opacity:.75">' + r.l.note + '</span>');
     });
   }).catch(function () {
     document.getElementById('loc-body').innerHTML = '<tr><td colspan="9">Dáta sa nepodarilo načítať. Otvorte stránku cez HTTP (GitHub Pages alebo lokálny server).</td></tr>';

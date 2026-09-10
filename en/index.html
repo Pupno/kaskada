@@ -50,7 +50,8 @@
     <p class="lead">Kaskáda is a modular data centre designed from the ground up so that its waste heat enters the district heating network instead of the atmosphere.</p>
     <p>Slovak district heating operators face a coal phase-out and rising ETS prices. At the same time, European demand for sovereign, taxonomy-aligned compute is growing. Kaskáda answers both with one asset: a 10 MW colocation and cloud facility with 100 % liquid cooling, whose waste heat is lifted by CO₂ heat pumps to 85 to 95 °C, the supply temperature of most Slovak primary hot-water networks.</p>
     <p>The project is structured as a public-private partnership with the municipal heating utility. Phase 1 CAPEX is <strong>€95 M</strong> with a 40 % grant share combined from the Slovak Modernisation Fund, Programme Slovakia and the EU Innovation Fund. Private-capital payback 6 to 7 years, IRR 13.8 %.</p>
-    <div class="callout"><span class="lbl">Why now</span>Article 12 of the recast Energy Efficiency Directive (EU) 2023/1791 requires data centres above 500 kW to utilise waste heat where technically and economically feasible. Slovakia has more than twenty district heating systems in towns above 20,000 inhabitants, several still fossil-based. Kaskáda is aligned with both trajectories.</div>
+    <div class="callout"><span class="lbl">Why now</span>The recast Energy Efficiency Directive (EU) 2023/1791 requires data centres above 500 kW to report energy KPIs (Art. 12) and those above 1 MW to assess and, where feasible, implement waste-heat recovery (Art. 26). Slovak district heating is predominantly gas-fired: the regulated variable heat price averaged €93.4/MWh in 2025 (ÚRSO), while recovered data-centre heat can be delivered for roughly €52/MWh (electricity ÷ (COP − 1) plus heat-pump capital). The state-owned MH Teplárenský Holding serves ~320,000 households in six cities, so the heat buyer is already the state. And the Modernisation Fund must spend its Slovak envelope by 2030.</div>
+    <div class="callout primary"><span class="lbl">Status, honestly</span>What exists: this proposal, the model, the data. What does not: a site, a licence, an anchor tenant, a signed heat offtake. The plan therefore opens with a 300 kW wedge pilot at a municipal pool (Deep Green model, under €0.5 M, no ÚRSO licence, revenue within 12 months) rather than a €95 M build.</div>
     <div class="callout green"><span class="lbl">Why it is open</span>The full proposal, data, model and sources are public under CC BY 4.0. Any utility, city or ministry can adopt it, change the assumptions in the calculator and apply it to its own site. The goal is not one project but a national programme.</div>
   </div>
 </section>
@@ -59,7 +60,8 @@
   <div class="ch-num"><b>02</b> Concept</div>
   <div class="ch-body">
     <h2>Liquid cooling as an industrial heat source.</h2>
-    <p>Direct-to-chip and immersion cooling raise the coolant outlet temperature to 55 to 65 °C. A two-stage CO₂ (R744) heat pump with COP ≈ 3.4 lifts it to 85 to 95 °C. Three 500 m³ storage tanks buffer eight hours of output. The utility keeps its own plants as backup; Kaskáda supplies baseload heat 8,760 hours a year, because IT load has no heating season.</p>
+    <p>Direct-to-chip and immersion cooling raise the coolant outlet temperature to 55 to 65 °C. A two-stage CO₂ (R744) heat pump with COP ≈ 3.4 lifts it to 85 to 95 °C. Three 500 m³ storage tanks buffer eight hours of output. The utility keeps its own plants as backup; Kaskáda supplies baseload heat 8,760 hours a year, because IT load has no heating season. Reference plant: Infomaniak D4 in Geneva (since November 2024) returns ~95 % of its energy to the SIG network at 67 °C, 1.7 MW thermal, ~6,000 homes, with the offtake contracted before construction.</p>
+    <p>Sequencing matters: cloud revenue first, heat second. Heat is 10 to 15 % of revenue, a margin enhancer, a permitting asset and the key to grants, not the core business. Grants fund the thermal part only, never servers or white space; the compute business must service its own capital.</p>
     <div class="kpi-grid">
       <div class="kpi"><span class="k">PUE</span><span class="v num">1.15</span><span class="sub">Taxonomy requires below 1.3</span></div>
       <div class="kpi"><span class="k">ERF</span><span class="v num">0.65</span><span class="sub">ISO/IEC 30134-6</span></div>
@@ -107,7 +109,7 @@
       <div class="stack-row green"><span class="lbl">EIB Green Loan / InvestEU<small>15-year senior debt</small></span><span class="amt">€42.0 M<small>44 %</small></span></div>
       <div class="stack-row"><span class="lbl">Equity<small>Strategic operator, financial partner, utility as minority shareholder</small></span><span class="amt">€15.0 M<small>16 %</small></span></div>
     </div>
-    <p>Each eligible cost is funded from exactly one source (no double funding). Taxonomy alignment in sections 8.1 (data centres) and 4.15 (district heating from waste heat) qualifies the project for green lending. Details: <a href="../financovanie/">Financovanie</a> and <code>data/funding.json</code>.</p>
+    <p>Each eligible cost is funded from exactly one source (no double funding). Taxonomy alignment in sections 8.1 (data centres) and 4.15 (district heating from waste heat) qualifies the project for green lending. EIB ELENA and TARGET technical assistance (up to 90 % of development costs, applied for with the municipality; precedent Partizánske 2024) cover the preparation phase outside this stack. Two grant scenarios: conservative (thermal part only, ~€14 M, 15 % of CAPEX, IRR ~10 %) and ambitious (plus Innovation Fund, €38 M, 40 %, IRR 13.8 %); without grants IRR is 7.8 %. Details: <a href="../financovanie/">Financovanie</a> and <code>data/funding.json</code>.</p>
   </div>
 </section>
 
@@ -145,6 +147,15 @@
       <li>Priority grid connection and accelerated permitting for taxonomy-aligned projects.</li>
       <li>An InvestEU guarantee window for the first three projects.</li>
       <li>A NECP target: 300 GWh/yr of heat from data centres and industry into district heating by 2035.</li>
+      <li>A pilot programme for municipal pools and aquaparks: sub-500 kW compute containers with a heat exchanger into the hot-water loop, no licence, results within one season.</li>
+    </ol>
+    <h3 class="small-cap">Kill criteria, stated up front</h3>
+    <ol class="plain">
+      <li>MHTH and two municipal utilities decline a heat purchase agreement above €45/MWh: the Slovak premium is theoretical and we do not build.</li>
+      <li>No site with grid, network and fibre after screening the six MHTH cities and the ten largest municipal systems.</li>
+      <li>Fewer than 1 MW of compute LOIs after six months of pre-selling.</li>
+      <li>State-aid rules exclude a private data-centre operator and no municipal JV fixes it.</li>
+      <li>The wedge pilot cannot beat the pool's gas cost by at least 20 % after a metered season.</li>
     </ol>
     <p>We do not ask for electricity subsidies, ETS exemptions, state ownership or capacity guarantees. Full policy brief with objections answered: <a href="../pre-stat/">Pre štát</a> (Slovak).</p>
   </div>
@@ -153,7 +164,7 @@
 <footer class="foot">
   <span>Kaskáda / proposal v1.0</span>
   <span>Figures are model estimates pending EIA and technical due diligence. <a href="../metodika/">Method and sources</a></span>
-  <span>CC BY 4.0 · MIT · <a href="https://github.com/Pupno/kaskada">GitHub</a></span>
+  <span>CC BY 4.0 · MIT · <a href="https://github.com/Pupno/kaskada">GitHub</a> · Slovak market data and several sources adapted from the open <a href="https://github.com/Mild-Solvent/heatcloud-slovakia">HeatCloud Slovakia</a> dossier (2026)</span>
 </footer>
 
 </div>

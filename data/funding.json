@@ -1,7 +1,12 @@
 {
   "_meta": {
-    "note": "Prehľad je orientačný. Intenzity pomoci a termíny výziev sa menia, pred podaním overte aktuálnu výzvu u riadiaceho orgánu. Pravidlo: jeden oprávnený náklad sa financuje len z jedného zdroja (zákaz dvojitého financovania).",
-    "date": "2026-09"
+    "note": "Prehľad je orientačný. Intenzity pomoci a termíny výziev sa menia, pred podaním overte aktuálnu výzvu u riadiaceho orgánu. Pravidlo: jeden oprávnený náklad sa financuje len z jedného zdroja (zákaz dvojitého financovania). Granty nefinancujú servery ani IT vybavenie; výpočtová časť CAPEX stojí na vlastných výnosoch.",
+    "date": "2026-09",
+    "scenarios": {
+      "conservative": { "grants_meur": 14, "share": 0.15, "irr": 0.10, "basis": "granty len na tepelnú časť (40 až 60 % z 24 mil. €) a prípravu (ELENA/TARGET)" },
+      "ambitious": { "grants_meur": 38, "share": 0.40, "irr": 0.138, "basis": "navyše Innovation Fund na integrovaný celok a Program Slovensko na R&D a OZE" },
+      "none": { "grants_meur": 0, "share": 0, "irr": 0.078, "basis": "bez grantu" }
+    }
   },
   "programs": [
     {
@@ -9,36 +14,63 @@
       "authority": "MŽP SR, SIEA (implementácia), EIB (hodnotenie)",
       "covers": "Tepelné čerpadlá, integrácia odpadového tepla do CZT, akumulácia tepla, rozvody",
       "intensity": "typicky 40 až 60 % oprávnených nákladov dekarbonizačnej časti",
-      "fit": 5, "phase": "Fáza 2 (2027 H1)", "amount_meur": 18.0,
-      "why": "Prioritná oblasť fondu je dekarbonizácia teplárenstva. Odpadové teplo z DC je nový, doteraz nevyužívaný zdroj v SR.",
+      "fit": 5, "phase": "Fáza 2 (2027)", "amount_meur": 18.0,
+      "why": "Slovenská obálka rádovo 3,9 mld. € do 2030; CZT je pomenovaná priorita. Fond potrebuje neplynové vlajkové projekty (Bankwatch doložil 55 mil. € pre plynové CZT).",
       "url": "https://www.minzp.sk"
+    },
+    {
+      "id": "scheme", "level": "SK", "name": "Schéma štátnej pomoci pre účinné CZT",
+      "authority": "MH SR, MIRRI SR (eurofondy.gov.sk)",
+      "covers": "Investície do energeticky účinných systémov CZT, vrátane pripojenia odpadového tepla",
+      "intensity": "podľa GBER, strop notifikácie 50 mil. € na projekt",
+      "fit": 4, "phase": "Fáza 2 až 3", "amount_meur": 0,
+      "why": "Právny rámec, cez ktorý sa poskytuje pomoc z Modernizačného fondu aj Programu Slovensko na tepelnú časť. Otvorená otázka: oprávnenosť súkromného prevádzkovateľa DC (vs. regulovaný teplárenský podnik alebo JV s mestom).",
+      "url": "https://eurofondy.gov.sk"
     },
     {
       "id": "if", "level": "EÚ", "name": "Innovation Fund (Small-scale)",
       "authority": "CINEA, Európska komisia",
-      "covers": "Inovatívna časť: prvé komerčné nasadenie CO2 tepelných čerpadiel pre DC v CEE, riadenie kaskády",
+      "covers": "Inovatívna časť: integrovaný celok DC + CO2 tepelné čerpadlá + akumulácia, riadenie kaskády",
       "intensity": "do 60 % relevantných nákladov (small-scale: CAPEX 2,5 až 20 mil. €)",
-      "fit": 4, "phase": "Fáza 2 (2027)", "amount_meur": 10.5,
-      "why": "Hodnotí stupeň inovácie, potenciál vyhnutých emisií a replikovateľnosť. Kaskáda je navrhnutá ako replikovateľný model pre 8 miest.",
+      "fit": 3, "phase": "Fáza 2 (2027)", "amount_meur": 10.5,
+      "why": "Hodnotí stupeň inovácie, potenciál vyhnutých emisií a replikovateľnosť. Silne pretlačený; možnosť, nie plán. Preto existuje konzervatívny scenár bez neho.",
       "url": "https://cinea.ec.europa.eu"
     },
     {
       "id": "ps1", "level": "SK / EÚ", "name": "Program Slovensko 2021–2027, priorita 1",
       "authority": "MIRRI SR",
-      "covers": "Výskumno-vývojová a digitálna zložka: monitoring, riadiaci systém, spolupráca s univerzitami",
+      "covers": "Výskumno-vývojová zložka: monitoring, riadiaci systém, spolupráca s univerzitami (nie servery)",
       "intensity": "podľa schémy štátnej pomoci, typicky 25 až 50 %",
       "fit": 3, "phase": "Fáza 2 až 3", "amount_meur": 6.0,
-      "why": "Cieľ politiky 1: inteligentnejšia Európa. Suverénna digitálna infraštruktúra je explicitná priorita.",
+      "why": "Cieľ politiky 1: inteligentnejšia Európa. Oprávnené sú výskumno-vývojové aktivity, nie kolokačná infraštruktúra.",
       "url": "https://www.mirri.gov.sk"
     },
     {
       "id": "ps2", "level": "SK / EÚ", "name": "Program Slovensko 2021–2027, priorita 2",
       "authority": "MIRRI SR, SIEA",
-      "covers": "Energetická efektívnosť, obnoviteľné zdroje na mieste (FV strecha, akumulácia elektriny)",
+      "covers": "Energetická efektívnosť, obnoviteľné zdroje na mieste, pripojenie na účinné CZT",
       "intensity": "typicky 35 až 60 % pre energetické opatrenia",
-      "fit": 3, "phase": "Fáza 3", "amount_meur": 3.5,
-      "why": "Cieľ politiky 2: zelenšia Európa. On-site OZE a efektívnosť sú štandardné oprávnené aktivity.",
+      "fit": 4, "phase": "Fáza 3", "amount_meur": 3.5,
+      "why": "Výzvy SIEA pre efektívnosť a OZE v podnikoch majú medzi oprávnenými aktivitami aj pripojenie na účinný systém CZT.",
       "url": "https://www.siea.sk"
+    },
+    {
+      "id": "elena", "level": "EÚ", "name": "EIB ELENA",
+      "authority": "Európska investičná banka",
+      "covers": "Príprava projektu: štúdie uskutočniteľnosti, projektová dokumentácia, právne stanoviská, verejné obstarávanie",
+      "intensity": "až 90 % nákladov na prípravu investičného programu CZT",
+      "fit": 5, "phase": "Fáza 1 až 2, podáva sa s mestom", "amount_meur": 2.0,
+      "why": "Presne nástroj na fázu, ktorú mesto ani tepláreň nevedia zaplatiť. Mimo CAPEX stacku.",
+      "url": "https://www.eib.org"
+    },
+    {
+      "id": "target", "level": "EÚ", "name": "EIB TARGET (technická pomoc pre regióny v transformácii)",
+      "authority": "Európska investičná banka",
+      "covers": "Technická pomoc pri plánovaní modernizácie CZT vrátane odpadového tepla",
+      "intensity": "technická pomoc, nie grant na investíciu",
+      "fit": 4, "phase": "Fáza 1", "amount_meur": 0,
+      "why": "Precedens na Slovensku: Partizánske (2024) plánuje modernizáciu CZT s geotermálom a odpadovým teplom s pomocou TARGET.",
+      "url": "https://www.eib.org"
     },
     {
       "id": "eib", "level": "EÚ", "name": "EIB Green Loan / InvestEU",
@@ -46,8 +78,17 @@
       "covers": "Dlhodobý dlh na hlavnú časť CAPEX",
       "intensity": "do 50 % celkových nákladov projektu, 15 až 20 rokov",
       "fit": 5, "phase": "Fáza 3 (financial close)", "amount_meur": 42.0,
-      "why": "Projekt spĺňa taxonómiu v dvoch sektoroch, čo je kvalifikačný predpoklad pre zelený úver. Grantová zložka znižuje riziko pre banku.",
+      "why": "Projekt spĺňa taxonómiu v dvoch sektoroch, čo je kvalifikačný predpoklad pre zelený úver. Podmienka: podpísané zmluvy o odbere tepla a kapacity.",
       "url": "https://www.eib.org"
+    },
+    {
+      "id": "ebrd_sih", "level": "EÚ / SK", "name": "EBRD a Slovak Investment Holding",
+      "authority": "EBRD, SIH",
+      "covers": "Seniorný dlh a spoluinvestícia; EBRD má dlhodobú históriu v CZT strednej Európy",
+      "intensity": "projektové financovanie po podpise odberových zmlúv",
+      "fit": 4, "phase": "Fáza 3", "amount_meur": 0,
+      "why": "Alternatíva alebo doplnok k EIB; SIH ako národný spoluinvestor a implementačný partner InvestEU.",
+      "url": "https://www.ebrd.com"
     },
     {
       "id": "he", "level": "EÚ", "name": "Horizon Europe, Cluster 5",
@@ -59,18 +100,28 @@
       "url": "https://cinea.ec.europa.eu"
     },
     {
+      "id": "rrf", "level": "SK / EÚ", "name": "Plán obnovy a odolnosti (RRF)",
+      "authority": "Úrad vlády SR",
+      "covers": "Financoval dekarbonizáciu CZT; mechanizmus končí v roku 2026",
+      "intensity": "uzavreté pre nové veľké projekty",
+      "fit": 0, "phase": "n/a", "amount_meur": 0,
+      "why": "Uvádzame pre úplnosť: nepočítame s ním.",
+      "url": "https://www.planobnovy.sk"
+    },
+    {
       "id": "ipcei", "level": "EÚ", "name": "IPCEI Next Generation Cloud Infrastructure and Services",
       "authority": "Európska komisia, členské štáty",
       "covers": "Možná budúca notifikácia pre fázu 2 a 3 (viac lokalít ako federovaný edge-cloud)",
       "intensity": "individuálna notifikácia štátnej pomoci",
       "fit": 2, "phase": "Fáza 2+ (2029+)", "amount_meur": 0,
-      "why": "Relevantné až pri národnom programe viacerých lokalít. Uvádzame pre úplnosť.",
+      "why": "Relevantné až pri národnom programe viacerých lokalít.",
       "url": "https://competition-policy.ec.europa.eu"
     }
   ],
   "state_aid_notes": [
     "Regionálna investičná pomoc: Žilinský a Košický kraj sú v mape regionálnej pomoci SR s vyššou maximálnou intenzitou než Bratislavský kraj.",
     "Environmentálna pomoc (GBER čl. 41, 46): opatrenia energetickej efektívnosti a CZT majú vlastné stropy intenzity, kumulácia je možná do stropu pre daný náklad.",
-    "Innovation Fund a Modernizačný fond sú fondy EÚ ETS, nie štrukturálne fondy; kumulácia s Programom Slovensko je možná, ak sa nefinancuje ten istý náklad."
+    "Innovation Fund a Modernizačný fond sú fondy EÚ ETS, nie štrukturálne fondy; kumulácia s Programom Slovensko je možná, ak sa nefinancuje ten istý náklad.",
+    "Otvorená otázka pre právne stanovisko (prvých 10 tis. € právnych nákladov): oprávnenosť súkromného prevádzkovateľa DC ako žiadateľa v schéme pre účinné CZT a v Modernizačnom fonde, a reálna intenzita pomoci po kumulácii. Riešenie: JV s teplárňou alebo mestom ako žiadateľ."
   ]
 }

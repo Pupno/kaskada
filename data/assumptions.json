@@ -1,9 +1,26 @@
 {
   "_meta": {
     "title": "Kaskáda: modelové predpoklady fázy 1",
-    "version": "1.0",
+    "version": "1.1",
     "date": "2026-09",
-    "note": "Všetky čísla sú modelové odhady pre predbežnú štúdiu. Podliehajú aktualizácii po EIA, technickom due diligence a záväzných ponukách dodávateľov. Zdroje a metodika: metodika/index.html"
+    "note": "Všetky čísla sú modelové odhady pre predbežnú štúdiu. Podliehajú aktualizácii po EIA, technickom due diligence a záväzných ponukách dodávateľov. Zdroje a metodika: metodika/index.html. Trhové údaje SR prevzaté z dossieru HeatCloud Slovakia (Mild-Solvent, 2026) a z publikácií ÚRSO."
+  },
+  "market_sk": {
+    "dc_capacity_mw": 30,
+    "dc_facilities": 14,
+    "dc_share_bratislava": 0.67,
+    "hyperscaler_region": false,
+    "nearest_cloud_regions": ["Viedeň", "Varšava"],
+    "district_heating_people": 1800000,
+    "mhth_cities": ["Bratislava", "Trnava", "Martin", "Žilina", "Zvolen", "Košice"],
+    "mhth_households": 320000,
+    "urso_2025_variable_eur_per_mwh": 93.4,
+    "urso_2025_fixed_eur_per_kw_year": 235.90,
+    "urso_2025_household_eur_year": 936,
+    "urso_2025_variable_change_vs_2024": -0.112,
+    "nordic_dc_heat_price_eur_per_mwh": [35, 45],
+    "modernisation_fund_sk_envelope_beur": 3.89,
+    "modernisation_fund_gas_dh_documented_meur": 55
   },
   "site": {
     "it_load_mw": 10,
@@ -15,19 +32,43 @@
     "wue_l_per_kwh": 0.05,
     "coolant_out_c": [55, 65],
     "dh_supply_c": [85, 95],
+    "dh_supply_secondary_c": [70, 75],
     "heat_pump_cop": 3.4,
+    "heat_pump_cop_secondary": 4.0,
     "heat_pump_refrigerant": "CO2 (R744), GWP 1",
     "storage_m3": 1500,
     "storage_buffer_h": 8,
     "tier": "III+",
     "availability_it": 0.99982
   },
+  "wedge_pilot": {
+    "it_load_kw": 300,
+    "capex_meur": [0.35, 0.45],
+    "site": "mestská plaváreň alebo aquapark, výmenník do okruhu teplej vody",
+    "heat_price": "plyn mínus 25 %, 3-ročná zmluva",
+    "licence_urso": false,
+    "eed_reporting": false,
+    "revenue_within_months": 12,
+    "precedent": "Deep Green (UK), Octopus Energy 200 mil. £ (2024)"
+  },
   "energy": {
     "electricity_gwh_year": 74.5,
-    "heat_recovered_gwh_year": 34.0,
+    "heat_recovered_gwh_year": 48.4,
+    "heat_delivered_model_gwh_year": 58.3,
     "heat_delivered_gwh_year": 48.0,
+    "summer_reserve": 0.18,
     "households_equivalent": 5000,
     "mwh_per_household_year": 10
+  },
+  "heat_cost": {
+    "formula": "náklad dodaného tepla ≈ cena elektriny / (COP − 1) + kapitál a údržba TČ",
+    "electricity_eur_per_mwh": 90,
+    "cop": 3.4,
+    "electricity_component_eur_per_mwh": 37.5,
+    "capex_om_component_eur_per_mwh": 14,
+    "delivered_cost_eur_per_mwh": 52,
+    "gas_reference_eur_per_mwh": 93.4,
+    "price_scenarios_eur_per_mwh": { "conservative": 45, "base_upside": 55, "gas_minus_25": 70 }
   },
   "emissions": {
     "ef_dh_baseline_t_per_mwh": 0.294,
@@ -53,7 +94,9 @@
     "software_monitoring": 3,
     "design_pm": 8,
     "contingency": 11,
-    "total": 95
+    "total": 95,
+    "thermal_part": 24,
+    "compute_part_note": "rádovo 60 mil. € (stavba, napájanie, IT priestor) nie je oprávnený náklad žiadneho grantu"
   },
   "funding_meur": {
     "modernizacny_fond": 18.0,
@@ -62,12 +105,15 @@
     "program_slovensko_po2": 3.5,
     "eib_green_loan": 42.0,
     "equity": 15.0,
-    "grant_share": 0.40,
-    "horizon_europe_rd_separate": 2.4
+    "elena_target_preparation_separate": 2.0,
+    "horizon_europe_rd_separate": 2.4,
+    "grant_share_ambitious": 0.40,
+    "grant_share_conservative": 0.15
   },
   "opex_year3_meur": {
     "revenue_colocation": 21.6,
     "revenue_heat": 2.2,
+    "revenue_heat_at_70": 3.4,
     "revenue_other": 0.6,
     "revenue_total": 24.4,
     "cost_electricity": 6.7,
@@ -85,12 +131,13 @@
     "fte": 45
   },
   "returns": {
-    "irr_after_tax": 0.138,
+    "irr_after_tax_ambitious": 0.138,
+    "irr_conservative_grant": 0.10,
+    "irr_no_grant": 0.078,
     "payback_years_private": 6.4,
     "npv_6pct_meur": 87,
     "dscr_avg": 1.68,
-    "dscr_min": 1.32,
-    "irr_no_grant": 0.078
+    "dscr_min": 1.32
   },
   "jobs": {
     "construction_person_years": 350,

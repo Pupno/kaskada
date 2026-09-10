@@ -58,7 +58,9 @@
   function render() {
     var m = model();
     // outputs on sliders
-    set('o-mw', f.n(m.mw) + ' MW'); set('o-util', f.n(val('util')) + ' %'); set('o-erf', f.n(m.erf, 2));
+    set('o-mw', f.n(m.mw, 1) + ' MW'); set('o-util', f.n(val('util')) + ' %'); set('o-erf', f.n(m.erf, 2));
+    var hcEl = val('elp') / (m.cop - 1), hc = hcEl + 14;
+    set('r-hc-el', f.n(hcEl, 1)); set('r-hc', f.n(hc, 1)); set('r-hc-margin', f.n(val('heatp') - hc, 1));
     set('o-cop', f.n(m.cop, 1)); set('o-avail', f.n(val('avail')) + ' %');
     set('o-efdh', f.n(val('efdh'), 3) + ' t/MWh'); set('o-efel', f.n(val('efel'), 2) + ' t/MWh');
     set('o-colo', f.n(val('colo')) + ' €/kW/m'); set('o-occ', f.n(val('occ')) + ' %');
@@ -80,6 +82,7 @@
     set('n-co2', f.n(Math.round(m.sites * m.co2Net / 1000)));
     set('n-capex', f.n(m.sites * m.capex, 0)); set('n-grant', f.n(m.sites * m.grantEur, 0));
     set('n-jobs', f.n(Math.round(m.sites * m.mw * 4.5)));
+    var hm = $('r-hc-margin'); if (hm) hm.parentNode.style.color = (val('heatp') - hc) < 0 ? 'var(--accent)' : '';
 
     // Taxonomy badge: ERF >= 0.5 and PUE 1.15 -> ok
     var b = $('r-tax');

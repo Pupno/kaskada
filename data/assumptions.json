@@ -133,14 +133,18 @@
     "fte": 45
   },
   "returns": {
-    "source": "model/index.html (assets/js/model.js), hodnoty približné, model je smerodajný",
-    "irr_project_ambitious": 0.117,
-    "irr_project_conservative_grant": 0.085,
-    "irr_project_no_grant": 0.073,
-    "payback_years_private_from_cod": 7.6,
-    "npv_6pct_meur": 53,
-    "dscr_min": 1.4,
-    "dscr_avg": 2.0,
+    "source": "model/index.html (assets/js/model.js), predvolené vstupy, výpočet 2026-09-14",
+    "irr_project_ambitious": 0.125,
+    "irr_equity_ambitious": 0.22,
+    "irr_project_conservative_grant": 0.091,
+    "irr_project_no_grant": 0.076,
+    "irr_project_heat_70": 0.14,
+    "irr_project_stress": 0.069,
+    "payback_years_private_from_cod": 7.7,
+    "npv_6pct_meur": 49.8,
+    "dscr_min": 1.39,
+    "dscr_avg": 2.25,
+    "dscr_min_conservative_grant": 0.98,
     "debt_terms": { "share_of_private_capital": 0.74, "rate": 0.042, "tenor_years": 15, "grace_years": 1 }
   },
   "jobs": {

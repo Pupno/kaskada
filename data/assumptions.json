@@ -42,8 +42,9 @@
     "availability_it": 0.99982
   },
   "wedge_pilot": {
-    "it_load_kw": 300,
-    "capex_meur": [0.35, 0.45],
+    "it_load_kw": [200, 300],
+    "capex_meur_without_servers": [0.4, 0.7],
+    "capex_note": "kontajner, ponorné chladenie, výmenníky, suchý chladič, elektro, meranie, riadenie, požiar, montáž; servery (0,3 až 12 mil. € podľa typu) dodáva partner s výpočtovou kapacitou; rozpätie podľa výrobcu vaní a rozsahu, pozri interný kusovník",
     "site": "mestská plaváreň alebo aquapark, výmenník do okruhu teplej vody",
     "heat_price": "plyn mínus 25 %, 3-ročná zmluva",
     "licence_urso": false,

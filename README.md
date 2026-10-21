@@ -11,7 +11,7 @@
 | Usporené emisie | 26,8 kt CO₂e/rok, 670 kt za 25 rokov |
 | Investícia | 95 mil. €, grant 40 % (Modernizačný fond, Innovation Fund, Program Slovensko), úver EIB 44 %, vlastný kapitál 16 % |
 | Návratnosť | IRR projektu 12,5 % (grant 40 %), 9,1 % (grant 15 %, len tepelná časť), 7,6 % bez grantu; návratnosť 7,7 roka, DSCR min. 1,39; z otvoreného 25-ročného modelu |
-| Prvý krok | Fáza 0: kontajner 300 kW pri mestskej plavárni, 0,35 až 0,45 mil. €, bez licencie ÚRSO, výsledok za sezónu |
+| Prvý krok | Fáza 0: kontajner 200 až 300 kW pri mestskej plavárni, 0,4 až 0,7 mil. € bez serverov, bez licencie ÚRSO, výsledok za sezónu |
 | Cena tepla | náklad ~52 €/MWh (elektrina / (COP − 1) + kapitál TČ) vs. regulovaný plyn 93,4 €/MWh (ÚRSO 2025) |
 | Parametre | PUE 1,15 · ERF 0,65 · WUE 0,05 l/kWh · COP 3,4 · 100 % OZE |
 
